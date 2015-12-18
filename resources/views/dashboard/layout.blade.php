@@ -92,16 +92,20 @@
 			</div>
 		</div>
 		<div class = "float-right">
-			<a href = "/dashboard/profile">
-				<div class = "box-padding" id = "profile-btn" title = "Profile Settings">
-					<i class="fa fa-cog"></i>
-				</div>
-			</a>
-			<a href = "/auth/logout">
-				<div class = "box-padding" id = "logout-btn" title = "Logout">
-					<i class="fa fa-power-off"></i>
-				</div>
-			</a>
+			<div class="btn btn-primary btn-sm">
+				<a href = "/dashboard/profile">
+					<div class = "box-padding" id = "profile-btn" title = "Profile Settings">
+						<i class="fa fa-cog"></i>
+					</div>
+				</a>
+			</div>
+			<div class="btn btn-danger btn-sm">
+				<a href = "/auth/logout">
+					<div class = "box-padding" id = "logout-btn" title = "Logout">
+						<i class="fa fa-power-off"></i>
+					</div>
+				</a>
+			</div>
 		</div>
 		
 	</header>
