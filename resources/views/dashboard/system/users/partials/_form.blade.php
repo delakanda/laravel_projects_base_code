@@ -32,7 +32,7 @@
     @if($context == 'add')
     <tr>
       <td>{!! Form::label("image_name","Image (optional)") !!}</td>
-      <td>{!! Form::file("image_name") !!}</td>
+      <td>{!! Form::file("image_name",['class' => 'btn btn-default btn-file']) !!}</td>
     </tr>
     @endif
 
@@ -40,7 +40,7 @@
       <tr>
         <td>{!! Form::label("image_name","Image (optional)") !!}</td>
         <td>
-          {!! Form::file("image_name",['class' => 'btn btn-default btn-file']) !!}
+          {!! Form::file("image_name", ['class' => 'btn btn-default btn-file']) !!}
           @if(isset($user->image_name))
             <div id = "small-image">
               <img src = "/uploads/{{$user->image_name}}" />
