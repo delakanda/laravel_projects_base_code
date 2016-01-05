@@ -1,4 +1,4 @@
-<div class = "card @if(isset($size)) {{ $size }} @else half @endif">
+<div class = "well @if(isset($size)) {{ $size }} @else half @endif">
 
   @if(isset($data->image_name))
     <div class = "details-image">
