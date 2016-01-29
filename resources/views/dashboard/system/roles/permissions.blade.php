@@ -4,7 +4,7 @@
 
 {!! Form::open(['method' => 'POST','action' => ['RoleController@savePermissions',$role->id] ] ) !!}
 
-<div class = "card half">
+<div class = "well half">
 
   <h3>Permissions for role : {{ $role->role_name }}</h3>
 
@@ -46,11 +46,13 @@
     </div>
   @endforeach
 
+  <br/><br/>
 
-</div>
 
-{!! Form::submit("Save", array('class' => 'submit-button')) !!}
+{!! Form::submit("Save", array('class' => 'btn btn-primary')) !!}
 
 {!! Form::close() !!}
+
+</div>
 
 @endsection
