@@ -31,8 +31,7 @@ a:hover{
 
 header#main-header{
   width:100%;
-  background-color: #2980b9;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.2);
+  background-color: #422E39;
   height: 50px;
   line-height: 50px;
   position: relative;
@@ -63,8 +62,7 @@ div#menu-btn{
 nav#main-nav{
   float:left;
   width:15%;
-  background-color: #FFF;
-  border-right: 1px solid #E1E1E1;
+  background-color: #F1F1F1;
 }
 
 nav#main-nav ul{
@@ -83,9 +81,9 @@ nav#main-nav ul li a{
 
 nav#main-nav ul li a.main-link{
   font-size: 16px;
-  background-color: #2980b9;
+  background-color: #F1F1F1;
   padding:10px;
-  color:#FFF;
+  color:#222;
   cursor: pointer;
 
 }
@@ -96,9 +94,9 @@ nav#main-nav ul li a.main-link i{
 }
 
 nav#main-nav ul li a.sub-link{
-  background-color: #F1F1F1;
+  background-color: #E7E7E7;
   padding:5px 10px;
-  color:#616161;
+  color:#222;
   font-size: 14px;
 }
 
@@ -151,6 +149,7 @@ div#profile-btn{
 #profile-pic{
   width:50px;
   height:50px;
+  margin-top: -1px;
 }
 
 #profile-pic img{
@@ -256,7 +255,7 @@ label{
 }*/
 
 .sub-title{
-  color:#4183D7;
+  color:#3E4651;
   font-weight: normal;
   margin:0px;
   margin-bottom: 10px;
@@ -571,7 +570,7 @@ table.permission-table tr:hover{
 }
 
 .active-link{
-  background-color: #E1E1E1 !important;
+  background-color: #DDDDDD !important;
   border-right: 3px solid #D1D1D1;
 }
 
@@ -704,9 +703,13 @@ table.permission-table tr:hover{
 }
 
 .box-padding{
-  padding:0px 10px;
+  padding:0px 20px;
   float:right;
   color:#FFF;
+}
+
+.box-padding:hover{
+  background-color: #43353D;
 }
 
 .float-left{
@@ -809,4 +812,9 @@ table.permission-table tr:hover{
 /****** override bootstrap style ********/
 .row{
   margin:0 !important;
+}
+
+.form-control{
+  outline:none !important;
+  box-shadow: none !important;
 }
