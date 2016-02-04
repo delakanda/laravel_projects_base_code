@@ -1,77 +1,34 @@
 <table class = "form-element full">
 
-  <tr>
-    <td>{!! Form::label("first_name","First Name") !!}</td>
-    <td>
-        {!! Form::text("first_name", null , ['placeholder' => 'First Name','class'=>'form-control']) !!}
-    </td>
-  </tr>
+  @include('dashboard.partials.form._text_field',['name' => 'first_name','displayName' => 'First Name'])
 
-  <tr>
-    <td>{!! Form::label("last_name","Last Name") !!}</td>
-    <td>
-        {!! Form::text("last_name", null , ['placeholder' => 'Last Name','class'=>'form-control']) !!}
-    </td>
-  </tr>
+  @include('dashboard.partials.form._text_field',['name' => 'last_name','displayName' => 'Last Name'])
 
-  <tr>
-    <td>{!! Form::label("username","Username") !!}</td>
-    <td>
-        {!! Form::text("username", null , ['placeholder' => 'Username','class'=>'form-control']) !!}
-    </td>
-  </tr>
+  @include('dashboard.partials.form._text_field',['name' => 'username','displayName' => 'Username'])
 
-  <tr>
-    <td>{!! Form::label("email","Email") !!}</td>
-    <td>
-        {!! Form::text("email", null , ['placeholder' => 'Email','class'=>'form-control']) !!}
-    </td>
-  </tr>
+  @include('dashboard.partials.form._text_field',['name' => 'email','displayName' => 'Email'])
 
-  @if(isset($context))
-    @if($context == 'add')
-    <tr>
-      <td>{!! Form::label("image_name","Image (optional)") !!}</td>
-      <td>{!! Form::file("image_name",['class' => 'btn btn-default btn-file']) !!}</td>
-    </tr>
-    @endif
+  @include('dashboard.partials.form._select_field',
+    [
+      'name' => 'role_id',
+      'displayName' => 'Roles',
+      'data' => $roles,
+      'datas_data' => ( isset($users_role) ? $users_role : null ),
+      'primary_key' => 'id',
+      'display_value' => 'role_name'
+    ]
+  )
 
-    @if($context == 'update')
-      <tr>
-        <td>{!! Form::label("image_name","Image (optional)") !!}</td>
-        <td>
-          {!! Form::file("image_name", ['class' => 'btn btn-default btn-file']) !!}
-          @if(isset($user->image_name))
-            <div id = "small-image">
-              <img src = "/uploads/{{$user->image_name}}" />
-            </div>
-            <input type = "checkbox" name = "clear_check" value = "yes" /> Clear Image (<span class = "small-text">Check to delete image</span>)
-          @endif
-        </td>
-      </tr>
-    @endif
-  @endif
+  @include('dashboard.partials.form._image_field',
+    [
+      'context' => $context,
+      'name' => 'image_name',
+      'displayName' => 'Image (optional)',
+      'data' => ( isset($user) ? $user : null ),
+      'imageColumnName' => 'image_name'
+    ]
+  )
 
-  @if(isset($roles))
-    <tr>
-      <td>{!! Form::label("role_id","Role") !!}</td>
-
-      @if(isset($users_role))
-      <td>
-          {!! Form::select("role_id", array( $users_role -> id => $users_role -> role_name ) +  $roles, $users_role, array('class' => 'form-control') ) !!}
-      </td>
-      @else
-      <td>
-        
-          {!! Form::select("role_id", $roles,null,array('class' => 'form-control') ) !!}
-
-      </td>
-      @endif
-    </tr>
-  @endif
-
-  <tr>
-    <td colspan="2" align="right">{!! Form::submit($submitButtonText, array('class' => 'btn btn-primary')) !!}</td>
-  </tr>
+  @include('dashboard.partials.form._button_field',['buttonText' => $submitButtonText])
 
 </table>

@@ -1,16 +1,7 @@
 <table class = "form-element full">
 
-  <tr>
-    <td>{!! Form::label("role_name","Role Name") !!}</td>
-    <td>
-    	<div class="form-group">
-    		{!! Form::text("role_name", null , ['placeholder' => 'Role Name','class'=>'form-control']) !!}
-    	</div>
-    </td>
-  </tr>
+  @include('dashboard.partials.form._text_field',['name' => 'role_name','displayName' => 'Role Name'])  
 
-  <tr>
-    <td colspan="2" align="right">{!! Form::submit($submitButtonText, array('class' => 'btn btn-primary')) !!}</td>
-  </tr>
+  @include('dashboard.partials.form._button_field',['buttonText' => $submitButtonText])
 
 </table>

@@ -110,33 +110,7 @@
 	    <ul>
 	      <li>
 
-			@if(isset($systemPermission))
-				<a id = "system" class = "main-link"> <i class="fa fa-plus"></i> &nbsp; System	</a>
-
-				@if(isset($companyPermission))
-					<a href = "/system/company" id = "company-sub-link" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'company') { echo 'active-link'; } } ?>">
-						<i class="fa fa-user"></i> &nbsp; Company Details
-					</a>
-				@endif
-
-				@if(isset($permissionPermission))
-					<a href = "/system/permissions" id = "permission-sub-link" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'permission') { echo 'active-link'; } } ?>">
-						<i class="fa fa-key"></i> &nbsp; Permissions
-					</a>
-				@endif
-
-				@if(isset($rolePermission))
-					<a href = "/system/roles" id = "role-sub-link" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'role') { echo 'active-link'; } } ?>">
-						<i class="fa fa-gavel"></i> &nbsp; Roles
-					</a>
-				@endif
-
-				@if(isset($userPermission))
-					<a href = "/system/users" id = "user-sub-link" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'user') { echo 'active-link'; } } ?>">
-						<i class="fa fa-user"></i> &nbsp; Users
-					</a>
-				@endif
-			@endif
+			@include('dashboard.partials.menu._system')
 
 	      </li>
 
@@ -146,18 +120,7 @@
 
   	<div id = "content-wrapper" class = "width-normal">
     	
-
-		@if(isset($warningMessage))
-	      	<div id = "warning-box">
-	        	{{ $warningMessage }}
-	      	</div>
-    	@endif
-
-		@if(Session::has('message'))
-			<div id = "session-box">
-				{{ Session::get('message') }}
-			</div>
-    	@endif
+  		@include('dashboard.partials.flash._flash_messages')
 
 		@if(isset($subTitle))
 			<h3 class = "sub-title">
@@ -167,33 +130,7 @@
 
     <div id = "content">
 
-			@if(isset($subLinks))
-				@foreach($subLinks as $subLink)
-					<?php
-
-						$subLinkAccess = null;
-
-						foreach($permissions as $permission)
-						{
-							if($permission->permission_name == $subLink['permission'])
-							{
-								$subLinkAccess = 1;
-								break;
-
-							}
-						}
-
-					?>
-
-					@if(isset($subLinkAccess))
-						<a @if(isset($subLink['route'])) href = "{{$subLink['route']}}" @endif>
-							<div id = "{{ str_replace(" ","_",strtolower($subLink['title'])) }}" class="btn btn-primary btn-sm mini-link" title = "{{$subLink['title']}}">
-								{!! $subLink['icon'] !!}
-							</div>
-						</a>
-					@endif
-				@endforeach
-			@endif
+		@include('dashboard.partials.links._sublinks')
 
       	@yield("content")
 
