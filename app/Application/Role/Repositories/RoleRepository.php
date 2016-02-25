@@ -1,7 +1,7 @@
 <?php namespace App\Application\Role\Repositories;
 
 use Illuminate\Http\Request;
-use App\Role;
+use App\Models\Role;
 
 class RoleRepository
 {

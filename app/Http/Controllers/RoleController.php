@@ -2,9 +2,9 @@
 
 use Illuminate\Http\Request;
 
-use App\Role;
-use App\User;
-use App\Permission;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\Permission;
 use Validator;
 use Image;
 use Hash;
@@ -160,14 +160,14 @@ class RoleController extends Controller {
 
 	public static function getModels()
 	{
-		$scan = scandir('../app');
+		$scan = scandir('../app/Models');
     	$models = array();
 
     	foreach($scan as $file)
     	{
-      		if(!is_dir("../app/$file"))
+      		if(!is_dir("../app/Models/$file"))
       		{
-        		array_push($models, str_replace(".php", "", "App\\".$file));
+        		array_push($models, str_replace(".php", "", "App\\Models\\".$file));
       		}
     	}
 

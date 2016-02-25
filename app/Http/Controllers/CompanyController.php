@@ -6,9 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Tasks\CommonTasks;
 use App\Http\Tasks\CompanyTasks;
 
-use App\Role;
-use App\Permission;
-use App\Company;
 use Validator;
 use Image;
 use Hash;

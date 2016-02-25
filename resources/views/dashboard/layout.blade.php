@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php
 		//get company details
-		$company = App\Company::all()->first();
+		$company = App\Models\Company::all()->first();
 	?>
 	<title>@if(isset($company->company_name)) {{ $company->company_name }} @else Company @endif | {{$title}}</title>
 
@@ -55,8 +55,7 @@
 
 				foreach($models as $model)
 				{
-
-					if(explode("_",$permission->permission_name)[1] == str_replace("app\\","",strtolower($model)))
+					if(explode("_",$permission->permission_name)[1] == str_replace("app\\models\\","",strtolower($model)))
 					{
 						${explode("_",$permission->permission_name)[1] . "Permission"} = 1;
 						break;

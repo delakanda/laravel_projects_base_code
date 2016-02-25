@@ -1,7 +1,7 @@
 <?php namespace App\Application\User\Repositories;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
 
 class UserRepository
 {

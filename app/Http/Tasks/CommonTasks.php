@@ -1,6 +1,6 @@
 <?php namespace App\Http\Tasks; 
 
-use App\Role;
+use App\Models\Role;
 use Image;
 
 class CommonTasks

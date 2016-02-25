@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -36,7 +36,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	  //define relationships
     public function role()
     {
-      return $this -> belongsTo("App\Role");
+      return $this -> belongsTo("App\Models\Role");
     }
 
 

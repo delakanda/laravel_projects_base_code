@@ -82,7 +82,7 @@ class BaseTestCase extends TestCase
 
     protected function submitForm()
     {
-        $submitBtn = $this->webDriver->findElement(WebDriverBy::className("submit-button"));
+        $submitBtn = $this->webDriver->findElement(WebDriverBy::className("btn-primary"));
         $submitBtn -> click();
     }
 
