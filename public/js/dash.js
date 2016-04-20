@@ -64,6 +64,9 @@ function handleMainMenu(id)
 {
 	setTimeout(function(){
 		$("#"+id).nextUntil(".main-link").fadeIn();
+		if(id != "dashboard") {
+			$("#"+id).find("i").toggleClass("fa-plus").toggleClass("fa-minus");
+		}
 	},100);
 }
 
