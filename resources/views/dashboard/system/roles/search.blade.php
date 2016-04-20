@@ -4,7 +4,7 @@
 
     <div class = "search-wrapper">
 
-      <input type = "text" name = "search" onkeyup="handleSearch('role_search','system','roles')" class = "form-control"
+      <input type = "text" name = "search" onkeyup="handleSearch('role_search','system','roles')" class = "form-control form-control-sm"
         placeholder = "Search Roles by Role Name "/>
 
     </div>

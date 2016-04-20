@@ -73,7 +73,7 @@ class PermissionTasks
 		$data['title'] = "Permissions";
 		$data['activeLink'] = "permission";
 		$data['subTitle'] = "Permissions";
-		$data['permissions'] = PermissionRepository::getAllPermissionsPaginated(20);
+		$data['permissions'] = PermissionRepository::getAllPermissionsPaginated(10);
 		$data['subLinks'] = array(
 			array
 			(

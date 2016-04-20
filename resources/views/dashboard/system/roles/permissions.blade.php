@@ -4,7 +4,7 @@
 
 {!! Form::open(['method' => 'POST','action' => ['RoleController@savePermissions',$role->id] ] ) !!}
 
-<div class = "well half">
+<div class = "card half">
 
   <h3>Permissions for role : {{ $role->role_name }}</h3>
 

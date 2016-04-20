@@ -4,7 +4,7 @@
 
     @if(isset($datas_data))
     <td>
-        {!! Form::select($name, array( $datas_data -> {$primary_key} => $datas_data -> {$display_value} ) +  $data, $datas_data, array('class' => 'form-control') ) !!}
+        {!! Form::select($name, array( $datas_data -> {$primary_key} => $datas_data -> {$display_value} ) +  $data, $datas_data, array('class' => 'form-control form-control-sm') ) !!}
     </td>
     @else
     <td>

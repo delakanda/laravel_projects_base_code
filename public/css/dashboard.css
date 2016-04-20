@@ -13,7 +13,7 @@ body{
   padding:0;
   background-color: #FFF;
   font-family: Open Sans Light;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 hr{
@@ -31,12 +31,12 @@ a:hover{
 
 header#main-header{
   width:100%;
-  background-color: #422E39;
+  background-color: #D6523C;
   height: 50px;
   line-height: 50px;
   position: relative;
   z-index: 99999;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 div#dash-heading{
@@ -80,7 +80,7 @@ nav#main-nav ul li a{
 }
 
 nav#main-nav ul li a.main-link{
-  font-size: 16px;
+  font-size: 14px;
   background-color: #F1F1F1;
   padding:10px;
   color:#222;
@@ -97,7 +97,7 @@ nav#main-nav ul li a.sub-link{
   background-color: #E7E7E7;
   padding:5px 10px;
   color:#222;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 nav#main-nav ul li a.sub-link:hover{
@@ -224,35 +224,34 @@ label{
 }
 
 /* PAGINATION STYLES **************************/
-/*.page_links ul li{
-	display: inline-block;
-	padding:2px 5px;
-	margin:2px;
-	background-color: #D1D1D1;
+.page-links{
+  margin-bottom: 20px;
 }
 
-.pagination .active{
-	background: #4183D7;
+.page-links .active{
+  background-color: #D6523C;
+  color:#FFF !important;
 }
 
-.pagination .active span{
-	color:#FFF;
+.page-links ul {
+  margin:0;
+  padding:0;
 }
 
-.pagination .disabled{
-	background-color: #E1E1E1;
+.page-links ul li{
+  list-style: none;
+  display: inline-block;
 }
 
-
-.page_links ul li span{
-	color:#717171;
-
+.page-links ul li span,.page-links ul li a{
+  display: block;
+  padding:5px 10px;
+  border:1px solid #E1E1E1;
 }
 
-.page_links ul li a{
-	text-decoration: none;
-	color:#616161;
-}*/
+.page-links ul li span:hover,.page-links ul li a:hover{
+  background-color: #E1E1E1;
+}
 
 .sub-title{
   color:#3E4651;
@@ -714,7 +713,7 @@ table.permission-table tr:hover{
 }
 
 .box-padding:hover{
-  background-color: #43353D;
+  background-color: #E75926;
 }
 
 .float-left{
@@ -831,10 +830,20 @@ table.permission-table tr:hover{
 }
 
 .btn-primary{
-  background-color: #8A2D3C;
+  background-color: #E75926;
   border:none;
+  outline: none !important;
+
 }
 
 .btn-primary:hover{
-  background-color: #422E39;
+  background-color: #F04903;
+}
+
+.btn-primary:active{
+  background-color: #FF7416 !important;
+}
+
+.table-sm td{
+  padding:8px 0px;
 }

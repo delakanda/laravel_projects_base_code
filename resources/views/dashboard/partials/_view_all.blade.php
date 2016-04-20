@@ -1,4 +1,4 @@
-<table class = "table table-hover">
+<table class = "table table-sm table-hover">
 <?php
   $permissions = \DB::table("permissions")->where("role_id",Auth::user()->role_id)->get();
 ?>
@@ -150,4 +150,4 @@
     <div id = "no-data">No Data</div>
   @endif
 
-<div class = "page_links">	{!! $data -> render() !!} </div>
+<div class = "page-links">	{!! $data -> render() !!} </div>
