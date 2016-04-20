@@ -54,7 +54,7 @@ header#main-header #dashboard{
 div#menu-btn{
   display: inline-block;
   cursor: pointer;
-  margin-left:20px;
+  margin-left:10px;
   margin-right:10px;
   color:#FFF;
 }
@@ -165,8 +165,8 @@ div#profile-btn{
 .view-table th{
   text-align: left;
   padding:5px;
-  color:#FFF;
-  background-color: #4183D7;
+  color:#919191;
+  background-color: #E1E1E1;
 }
 
 .view-table td{
@@ -249,7 +249,7 @@ label{
   border:1px solid #E1E1E1;
 }
 
-.page-links ul li span:hover,.page-links ul li a:hover{
+.page-links ul li a:hover{
   background-color: #E1E1E1;
 }
 
@@ -623,7 +623,7 @@ table.permission-table tr:hover{
 }
 
 .clickable-row:hover{
-  background-color: #E1E1E1;
+  background-color: #F1F1F1;
 }
 
 /******************************************/
@@ -826,7 +826,7 @@ table.permission-table tr:hover{
 }
 
 .form-control:focus{
-  border-color:#3C3741;
+  border-color:#D6523C;
 }
 
 .btn-primary{
@@ -837,7 +837,7 @@ table.permission-table tr:hover{
 }
 
 .btn-primary:hover{
-  background-color: #F04903;
+  background-color: #FF7E55;
 }
 
 .btn-primary:active{
