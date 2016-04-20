@@ -1,7 +1,7 @@
 <?php namespace App\Application\Permission\Repositories;
 
 use Illuminate\Http\Request;
-use App\Permission;
+use App\Models\Permission;
 
 class PermissionRepository
 {

@@ -5,8 +5,8 @@ use App\Application\Company\Repositories\CompanyRepository;
 
 use App\Http\Tasks\CommonTasks;
 
-use App\Role;
-use App\Company;
+use App\Models\Role;
+use App\Models\Company;
 use Validator;
 use Image;
 use Hash;

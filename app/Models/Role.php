@@ -1,4 +1,6 @@
-<?php namespace App;
+<?php 
+
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,12 +11,12 @@ class Role extends Model{
 	//define relationships
 	public function user()
 	{
-		return $this -> hasMany("App\User");
+		return $this -> hasMany("App\Models\User");
 	}
 
 	public function permission()
 	{
-		return $this -> hasMany("App\Permission");
+		return $this -> hasMany("App\Models\Permission");
 	}
 
 	public static function getPermissions()

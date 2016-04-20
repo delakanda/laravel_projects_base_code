@@ -31,7 +31,7 @@
         (
           array(
           'name'=>'Role',
-          'model'=> 'App\Role',
+          'model'=> 'App\Models\Role',
           'key'=> 'role_id',
           'property' => 'role_name'
           )

@@ -1,4 +1,6 @@
-<?php namespace App;
+<?php 
+
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +11,7 @@ class Permission extends Model{
 	//define relationships
 	public function role()
 	{
-		return $this -> belongsTo("App\Role");
+		return $this -> belongsTo("App\Models\Role");
 	}
 
 	public static function getPermissions()

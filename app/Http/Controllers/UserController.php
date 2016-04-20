@@ -2,8 +2,8 @@
 
 use Illuminate\Http\Request;
 
-use App\User;
-use App\Role;
+use App\Models\User;
+use App\Models\Role;
 use Validator;
 use Image;
 use Hash;

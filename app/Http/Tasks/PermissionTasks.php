@@ -4,8 +4,8 @@ use Illuminate\Http\Request;
 use App\Application\Permission\Repositories\PermissionRepository;
 
 use App\Http\Tasks\CommonTasks;
-use App\Permission;
-use App\Role;
+use App\Models\Permission;
+use App\Models\Role;
 
 use Validator;
 use Image;

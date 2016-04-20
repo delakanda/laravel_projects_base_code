@@ -1,10 +1,10 @@
 <?php namespace App\Http\Controllers;
 
-use App\Job;
-use App\User;
-use App\Role;
-use App\Department;
-use App\Employee;
+use App\Models\Job;
+use App\Models\User;
+use App\Models\Role;
+use App\Models\Department;
+use App\Models\Employee;
 use App\Application;
 use App\Reminder;
 use Auth;
