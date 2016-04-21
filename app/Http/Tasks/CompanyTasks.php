@@ -1,7 +1,7 @@
 <?php namespace App\Http\Tasks; 
 
 use Illuminate\Http\Request;
-use App\Application\Company\Repositories\CompanyRepository;
+use App\Application\Repositories\CompanyRepository;
 
 use App\Http\Tasks\CommonTasks;
 

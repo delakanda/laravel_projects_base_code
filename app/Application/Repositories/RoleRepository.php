@@ -1,9 +1,10 @@
-<?php namespace App\Application\Role\Repositories;
+<?php namespace App\Application\Repositories;
 
-use Illuminate\Http\Request;
 use App\Models\Role;
+use Illuminate\Http\Request;
+use App\Utilities\Contracts\RepositoryInterface;
 
-class RoleRepository
+class RoleRepository implements RepositoryInterface
 {
 	/**
 	* This class is the repository for all roles queries
@@ -14,12 +15,12 @@ class RoleRepository
 		return Role::all();
 	}
 
-	public static function getAllRolesPaginated($pages)
+	public function getAllPaginated($pages)
 	{
 		return Role::orderBy("updated_at","DESC")->paginate($pages);
 	}
 
-	public static function getRole($id)
+	public function getItem($id)
 	{
 		return Role::find($id);
 	}

@@ -1,4 +1,4 @@
-<?php namespace App\Application\Permission\Repositories;
+<?php namespace App\Application\Repositories;
 
 use Illuminate\Http\Request;
 use App\Models\Permission;

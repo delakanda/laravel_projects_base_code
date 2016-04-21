@@ -1,9 +1,10 @@
 <?php namespace App\Http\Tasks; 
 
 use Illuminate\Http\Request;
-use App\Application\Role\Repositories\RoleRepository;
-use App\Application\Permission\Repositories\PermissionRepository;
-use App\Application\User\Repositories\UserRepository;
+use App\Utilities\Common\DataPopulator;
+use App\Application\Repositories\RoleRepository;
+use App\Application\Repositories\PermissionRepository;
+use App\Application\Repositories\UserRepository;
 use App\Http\Controllers\RoleController;
 use App\Http\Tasks\CommonTasks;
 use App\Models\Role;
@@ -19,6 +20,27 @@ use Auth;
 
 class RoleTasks
 {
+	private $modelName = "Role";
+	private $rootRoute = "system";
+	private $currentRoute = "roles";
+	private $permissionPrefix = "system_role";
+	private $activeLinkFlag = "role";
+	private $dataArr = null;
+	private $repo = null;
+	
+	public function __construct()
+	{
+		$this->dataArr = [
+			'activeLinkFlag'	=> $this->activeLinkFlag,
+			'modelName'			=> $this->modelName,
+			'rootRoute'			=> $this->rootRoute,
+			'currentRoute'		=> $this->currentRoute,
+			'permissionPrefix'	=> $this->permissionPrefix
+		];
+
+		$this->repo = new RoleRepository;
+	}
+
 	public static function storeRoleData(Request $request)
 	{
 		$rules = self::getRules();
@@ -120,116 +142,29 @@ class RoleTasks
 		return Redirect::to("/system/roles/permissions/$id")->send();
 	}
 
-	public static function populateIndexData()
+	public function populateIndexData()
 	{
-		$data['title'] = "Roles";
-		$data['activeLink'] = "role";
-		$data['subTitle'] = "Roles";
-    	$data['roles'] = RoleRepository::getAllRolesPaginated(20);
-    	$data['subLinks'] = array(
-      		array
-      		(
-		        "title" => "Add Role",
-		        "route" => "/system/roles/create",
-		        "icon" => "<i class='fa fa-plus'></i>",
-				"permission" => "system_role_can_add"
-		    ),
-			array
-			(
-				"title" => "Search for Role",
-				"route" => "/system/roles/search",
-				"icon" => "<i class='fa fa-search'></i>",
-				"permission" => "system_role_can_search"
-			)
-    	);
+		$this->dataArr['title'] = 'Roles';
+		$this->dataArr['dbDataName'] = 'roles'; 			
 
-    	return $data;
+ 		return DataPopulator::populateIndexData($this->repo,$this->dataArr);
 	}
 
-	public static function populateCreateData()
+	public function populateCreateData()
 	{
-		$data['title'] = "Add Role";
-		$data['activeLink'] = "role";
-		$data['subTitle'] = "Add Role";
-    	$data['subLinks'] = array(
-			array
-			(
-				"title" => "Role list",
-				"route" => "/system/roles",
-				"icon" => "<i class='fa fa-th-list'></i>",
-				"permission" => "system_role_can_view"
-			)
-    	);
-
-    	return $data;
+    	return DataPopulator::populateCreateData($this->dataArr);
 	}
 
-	public static function populateEditData($id)
+	public function populateEditData($id)
 	{
-		$data['title'] = "Edit Role";
-		$data['activeLink'] = "role";
-		$data['subTitle'] = "Edit Role";
-    	$data['subLinks'] = array(
-			array
-			(
-				"title" => "Role list",
-				"route" => "/system/roles",
-				"icon" => "<i class='fa fa-th-list'></i>",
-				"permission" => "system_role_can_view"
-			),
-			array
-			(
-				"title" => "Add Role",
-				"route" => "/system/roles/create",
-				"icon" => "<i class='fa fa-plus'></i>",
-				"permission" => "system_role_can_add"
-			),
-    	);
-
-		$data['role'] = RoleRepository::getRole($id);
-
-    	return $data;
+		$this->dataArr['dbDataName'] = "role";
+		return DataPopulator::populateEditData($this->repo,$this->dataArr,$id);
 	}
 
-	public static function populateShowData($id)
+	public function populateShowData($id)
 	{
-		$data['title'] = "View Role Details";
-		$data['activeLink'] = "role";
-		$data['subTitle'] = "View Role Details";
-		$data['subLinks'] = array(
-			array
-			(
-				"title" => "Role List",
-				"route" => "/system/roles",
-				"icon" => "<i class='fa fa-th-list'></i>",
-				"permission" => "system_role_can_view"
-			),
-			array
-			(
-				"title" => "Add Role",
-				"route" => "/system/roles/create",
-				"icon" => "<i class='fa fa-plus'></i>",
-				"permission" => "system_role_can_add"
-			),
-			array
-			(
-				"title" => "Edit Role",
-				"route" => "/system/roles/".$id.'/edit',
-				"icon" => "<i class='fa fa-pencil'></i>",
-				"permission" => "system_role_can_edit"
-			),
-			array
-			(
-				"title" => "Delete Role",
-				"route" => "/system/roles/delete/".$id,
-				"icon" => "<i class = 'fa fa-trash'></i>",
-				"permission" => "system_role_can_delete"
-			)
-		);
-
-		$data['role'] = RoleRepository::getRole($id);
-
-		return $data;
+		$this->dataArr['dbDataName'] = "role";
+		return DataPopulator::populateShowData($this->repo,$this->dataArr,$id);
 	}
 
 	public static function populatePermissionsData($id)
@@ -265,29 +200,9 @@ class RoleTasks
 		return $data;
 	}
 
-	public static function populateSearchData()
+	public function populateSearchData()
 	{
-		$data['title'] = "Search for Role";
-		$data['activeLink'] = "role";
-		$data['subTitle'] = "Search For Role";
-		$data['subLinks'] = array(
-			array
-			(
-				"title" => "Role List",
-				"route" => "/system/roles",
-				"icon" => "<i class='fa fa-th-list'></i>",
-				"permission" => "system_role_can_view"
-			),
-			array
-			(
-				"title" => "Add Role",
-				"route" => "/system/roles/create",
-				"icon" => "<i class='fa fa-plus'></i>",
-				"permission" => "system_role_can_add"
-			)
-		);
-
-		return $data;
+		return DataPopulator::populateCreateData($this->dataArr);
 	}
 
 	public static function getRules()

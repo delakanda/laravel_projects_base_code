@@ -1,8 +1,8 @@
 <?php namespace App\Http\Tasks; 
 
 use Illuminate\Http\Request;
-use App\Application\User\Repositories\UserRepository;
-use App\Application\Role\Repositories\RoleRepository;
+use App\Application\Repositories\UserRepository;
+use App\Application\Repositories\RoleRepository;
 use App\Http\Controllers\RoleController;
 use App\Http\Tasks\CommonTasks;
 use App\Models\User;

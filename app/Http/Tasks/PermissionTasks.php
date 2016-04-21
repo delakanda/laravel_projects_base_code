@@ -1,7 +1,7 @@
 <?php namespace App\Http\Tasks; 
 
 use Illuminate\Http\Request;
-use App\Application\Permission\Repositories\PermissionRepository;
+use App\Application\Repositories\PermissionRepository;
 
 use App\Http\Tasks\CommonTasks;
 use App\Models\Permission;

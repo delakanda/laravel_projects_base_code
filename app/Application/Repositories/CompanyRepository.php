@@ -1,4 +1,4 @@
-<?php namespace App\Application\Company\Repositories;
+<?php namespace App\Application\Repositories;
 
 use App\Models\Company;
 

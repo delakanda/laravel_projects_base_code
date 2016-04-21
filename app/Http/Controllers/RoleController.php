@@ -13,7 +13,6 @@ use Input;
 use Redirect;
 use Response;
 use Auth;
-
 use App\Http\Tasks\RoleTasks;
 use App\Http\Tasks\CommonTasks;
 
@@ -24,7 +23,7 @@ class RoleController extends Controller {
 	{
 		if(self::checkUserPermissions("system_role_can_view"))
 		{
-	    	$data = RoleTasks::populateIndexData();
+	    	$data = (new RoleTasks)->populateIndexData();
 	    	return view('dashboard.system.roles.index',$data);
 		}
 		else
@@ -37,7 +36,7 @@ class RoleController extends Controller {
   	{
 		if(self::checkUserPermissions("system_role_can_add"))
 		{
-			$data = RoleTasks::populateCreateData();
+			$data = (new RoleTasks)->populateCreateData();
 	    	return view('dashboard.system.roles.add',$data);
 		}
 		else
@@ -62,7 +61,7 @@ class RoleController extends Controller {
   	{
 		if(self::checkUserPermissions("system_role_can_edit"))
 		{
-			$data = RoleTasks::populateEditData($id);
+			$data = (new RoleTasks)->populateEditData($id);
 	    	return view('dashboard.system.roles.edit',$data);
 		}
 		else
@@ -87,7 +86,7 @@ class RoleController extends Controller {
   	{
 		if(self::checkUserPermissions("system_role_can_view"))
 		{
-			$data = RoleTasks::populateShowData($id);
+			$data = (new RoleTasks)->populateShowData($id);
 			return view('dashboard.system.roles.view',$data);
 		}
 		else
@@ -138,7 +137,7 @@ class RoleController extends Controller {
 	{
 		if(self::checkUserPermissions("system_role_can_search"))
 		{
-			$data = RoleTasks::populateSearchData();
+			$data = (new RoleTasks)->populateSearchData();
 			return view('dashboard.system.roles.search',$data);
 		}
 		else
