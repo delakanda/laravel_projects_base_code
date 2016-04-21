@@ -21,7 +21,7 @@ class PermissionController extends Controller {
 	{
 		if(self::checkUserPermissions("system_permission_can_view"))
 		{
-			$data = PermissionTasks::populateIndexData();
+			$data = (new PermissionTasks)->populateIndexData();
 			return view('dashboard.system.permissions.index',$data);
 		}
 		else

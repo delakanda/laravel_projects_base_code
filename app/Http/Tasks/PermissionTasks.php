@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\Application\Repositories\PermissionRepository;
-
+use App\Utilities\Common\DataPopulator;
 use App\Http\Tasks\CommonTasks;
 use App\Models\Permission;
 use App\Models\Role;
@@ -18,6 +18,27 @@ use Auth;
 
 class PermissionTasks
 {
+	private $modelName = "Permission";
+	private $rootRoute = "system";
+	private $currentRoute = "permissions";
+	private $permissionPrefix = "system_permission";
+	private $activeLinkFlag = "permission";
+	private $dataArr = null;
+	private $repo = null;
+	
+	public function __construct()
+	{
+		$this->dataArr = [
+			'activeLinkFlag'	=> $this->activeLinkFlag,
+			'modelName'			=> $this->modelName,
+			'rootRoute'			=> $this->rootRoute,
+			'currentRoute'		=> $this->currentRoute,
+			'permissionPrefix'	=> $this->permissionPrefix
+		];
+
+		$this->repo = new PermissionRepository;
+	}
+
 	public static function storePermissionData(Request $request)
 	{
 		$rules = self::getRules();
@@ -68,30 +89,12 @@ class PermissionTasks
 		return Redirect::to("/system/permissions")->send();
 	}
 
-	public static function populateIndexData()
+	public function populateIndexData()
 	{
-		$data['title'] = "Permissions";
-		$data['activeLink'] = "permission";
-		$data['subTitle'] = "Permissions";
-		$data['permissions'] = PermissionRepository::getAllPermissionsPaginated(10);
-		$data['subLinks'] = array(
-			array
-			(
-			"title" => "Add Permission",
-			"route" => "/system/permissions/create",
-			"icon" => "<i class='fa fa-plus'></i>",
-			"permission" => "system_permission_can_add"
-			),
-			array
-			(
-			"title" => "Search for permission",
-			"route" => "/system/permissions/search",
-			"icon" => "<i class='fa fa-search'></i>",
-			"permission" => "system_permission_can_search"
-			)
-		);	
+		$this->dataArr['title'] = 'Permission';
+		$this->dataArr['dbDataName'] = 'permissions'; 			
 
-		return $data;
+ 		return DataPopulator::populateIndexData($this->repo,$this->dataArr);
 	}
 
 	public static function populateCreateData()

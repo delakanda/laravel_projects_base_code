@@ -23,7 +23,7 @@ class UserController extends Controller {
 	{
 		if(self::checkUserPermissions("system_user_can_view"))
 		{
-			$data = UserTasks::populateIndexData();
+			$data = (new UserTasks)->populateIndexData();
 			return view('dashboard.system.users.index',$data);
 		}
 		else
@@ -36,7 +36,7 @@ class UserController extends Controller {
 	{
 		if(self::checkUserPermissions("system_user_can_add"))
 		{
-	    	$data = UserTasks::populateCreateData();
+	    	$data = (new UserTasks)->populateCreateData();
 			return view('dashboard.system.users.add',$data);
 		}
 		else
@@ -59,25 +59,19 @@ class UserController extends Controller {
 
 	public function edit($id)
 	{
-		if(self::checkUserPermissions("system_user_can_edit"))
-		{
-			$data = UserTasks::populateEditData($id);
+		if(self::checkUserPermissions("system_user_can_edit")) {
+			$data = (new UserTasks)->populateEditData($id);
 			return view('dashboard.system.users.edit',$data);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
 	}
 
 	public function update(Request $request,$id)
 	{
-		if(self::checkUserPermissions("system_user_can_edit"))
-		{
+		if(self::checkUserPermissions("system_user_can_edit")) {
 			UserTasks::updateUserData($request,$id);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
 
@@ -85,37 +79,28 @@ class UserController extends Controller {
 
 	public function show($id)
 	{
-		if(self::checkUserPermissions("system_user_can_view"))
-		{
-			$data = UserTasks::populateShowData($id);
+		if(self::checkUserPermissions("system_user_can_view")) {
+			$data = (new UserTasks)->populateShowData($id);
 			return view('dashboard.system.users.view',$data);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
 	}
 
 	public function delete($id)
 	{
-		if(self::checkUserPermissions("system_user_can_delete"))
-		{
+		if(self::checkUserPermissions("system_user_can_delete")) {
 			UserTasks::deleteUserData($id);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
 	}
 
 	public function resetUserPassword($id)
 	{
-		if(self::checkUserPermissions("system_user_can_reset-password"))
-		{
+		if(self::checkUserPermissions("system_user_can_reset-password")) {
 			UserTasks::resetUserPassword($id);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
 	}
@@ -131,13 +116,10 @@ class UserController extends Controller {
 
 	public function search()
 	{
-		if(self::checkUserPermissions("system_user_can_search"))
-		{
-			$data = UserTasks::populateSearchData();
+		if(self::checkUserPermissions("system_user_can_search")) {
+			$data = (new UserTasks)->populateSearchData();
 			return view('dashboard.system.users.search',$data);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
 	}
@@ -155,7 +137,7 @@ class UserController extends Controller {
 		->get();
 		
 		return Response::json(
-				$users
+			$users
 		);
 	}
 }

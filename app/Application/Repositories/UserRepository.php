@@ -1,9 +1,10 @@
 <?php namespace App\Application\Repositories;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use App\Utilities\Contracts\RepositoryInterface;
 
-class UserRepository
+class UserRepository implements RepositoryInterface
 {
 	/**
 	* This class is the repository for all user queries
@@ -14,12 +15,12 @@ class UserRepository
 		return User::all();
 	}
 
-	public static function getAllUsersPaginated($pages)
+	public function getAllPaginated($pages)
 	{
 		return User::orderBy("updated_at","DESC")->paginate($pages);
 	}
 
-	public static function getUser($id)
+	public function getItem($id)
 	{
 		return User::find($id);
 	}

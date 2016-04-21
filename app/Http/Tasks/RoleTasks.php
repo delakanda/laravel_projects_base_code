@@ -84,7 +84,7 @@ class RoleTasks
 
 	public static function deleteRoleData($id)
 	{
-		$role = RoleRepository::getRole($id);
+		$role = (new RoleRepository)->getItem($id);
 
 		//check if users are assigned to this role, if not delete role else error (to avoid cascade delete)
 		$affiliatedUsers = UserRepository::getAffiliatedToCount("role_id",$id);
@@ -119,7 +119,7 @@ class RoleTasks
 		array_shift($selectedPermissions);
 
 		//select all where role_id = selected id
-		$role = RoleRepository::getRole($id);
+		$role = (new RoleRepository)->getItem($id);
 
 		//select all permissions with that role id
 		$rolesPermissions = PermissionRepository::getWhere("role_id",$id,"MODEL_MODE");
@@ -189,7 +189,7 @@ class RoleTasks
 			)
 		);
 
-		$role = RoleRepository::getRole($id);
+		$role = (new RoleRepository)->getItem($id);
 		$roles_permissions = PermissionRepository::getWhere("role_id",$id,"DATA_MODE");
 
 		$data['role'] = $role;

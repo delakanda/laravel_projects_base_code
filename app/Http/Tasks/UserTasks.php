@@ -1,6 +1,7 @@
 <?php namespace App\Http\Tasks; 
 
 use Illuminate\Http\Request;
+use App\Utilities\Common\DataPopulator;
 use App\Application\Repositories\UserRepository;
 use App\Application\Repositories\RoleRepository;
 use App\Http\Controllers\RoleController;
@@ -18,6 +19,27 @@ use Auth;
 
 class UserTasks
 {
+	private $modelName = "User";
+	private $rootRoute = "system";
+	private $currentRoute = "users";
+	private $permissionPrefix = "system_user";
+	private $activeLinkFlag = "user";
+	private $dataArr = null;
+	private $repo = null;
+	
+	public function __construct()
+	{
+		$this->dataArr = [
+			'activeLinkFlag'	=> $this->activeLinkFlag,
+			'modelName'			=> $this->modelName,
+			'rootRoute'			=> $this->rootRoute,
+			'currentRoute'		=> $this->currentRoute,
+			'permissionPrefix'	=> $this->permissionPrefix
+		];
+
+		$this->repo = new UserRepository;
+	}
+
 	public static function storeUserData(Request $request)
 	{
 		$rules = self::getRules();
@@ -109,7 +131,7 @@ class UserTasks
 
 	public static function deleteUserData($id)
 	{
-		$user = User::find($id);
+		$user = (new UserRepository)->getItem($id);
 
     	if($user -> image_name != null)
 		{
@@ -127,7 +149,7 @@ class UserTasks
 
 	public static function resetUserPassword($id)
 	{
-		$user = UserRepository::getUser($id);
+		$user = (new UserRepository)->getItem($id);
 
 		$user -> status = 2;
 		$user -> password = Hash::make("password");
@@ -138,69 +160,28 @@ class UserTasks
 		return Redirect::to("/system/users")->send();
 	}
 
-	public static function populateIndexData()
+	public function populateIndexData()
 	{
-		$data['title'] = "Users";
-		$data['activeLink'] = "user";
-		$data['subTitle'] = "All System Users";
-    	$data['users'] = UserRepository::getAllUsersPaginated(20);
-		$data['subLinks'] = array(
-			array
-			(
-				"title" => "Add User",
-				"route" => "/system/users/create",
-				"icon" => "<i class='fa fa-plus'></i>",
-				"permission" => "system_user_can_add"
-			),
-			array
-			(
-				"title" => "Search for User",
-				"route" => "/system/users/search",
-				"icon" => "<i class='fa fa-search'></i>",
-				"permission" => "system_user_can_search"
-			)
-		);
+		$this->dataArr['title'] = 'Users';
+		$this->dataArr['dbDataName'] = 'users'; 			
+
+ 		return DataPopulator::populateIndexData($this->repo,$this->dataArr);
+	}
+
+	public function populateCreateData()
+	{
+		$data = DataPopulator::populateCreateData($this->dataArr);
+		$data['roles'] = CommonTasks::getSelectArray("roles","role_name","ASC");
 
 		return $data;
 	}
 
-	public static function populateCreateData()
+	public function populateEditData($id)
 	{
-		$data['title'] = "Add User";
-		$data['activeLink'] = "user";
-		$data['subTitle'] = "Add a System User";
-		$data['subLinks'] = array(
-			array
-			(
-				"title" => "User List",
-				"route" => "/system/users",
-				"icon" => "<i class='fa fa-th-list'></i>",
-				"permission" => "system_user_can_view"
-			)
-		);
+		$this->dataArr['dbDataName'] = "user";
+		$data = DataPopulator::populateEditData($this->repo,$this->dataArr,$id);
 
-		$data['roles'] = CommonTasks::getSelectArray("roles","role_name","ASC");//CommonTasks::getRolesArray();
-
-		return $data;
-	}
-
-	public static function populateEditData($id)
-	{
-		$data['title'] = "Edit User";
-		$data['activeLink'] = "user";
-		$data['subTitle'] = "Edit System User Details";
-		$data['subLinks'] = array(
-			array
-			(
-				"title" => "User List",
-				"route" => "/system/users",
-				"icon" => "<i class='fa fa-th-list'></i>",
-				"permission" => "system_user_can_view"
-			)
-		);
-
-		$user = UserRepository::getUser($id);
-		$data['user'] = $user;
+		$user = (new UserRepository)->getItem($id);
 
 		$data['roles'] = CommonTasks::getSelectArray("roles","role_name","ASC");//CommonTasks::getRolesArray();
 		$data['users_role'] = Role::where('id','=',$user -> role_id)->first();
@@ -208,70 +189,15 @@ class UserTasks
 		return $data;
 	}
 
-	public static function populateShowData($id)
+	public function populateShowData($id)
 	{
-		$data['title'] = "View User Details";
-		$data['activeLink'] = "user";
-		$data['subTitle'] = "View System User Details";
-		$data['subLinks'] = array(
-			array
-			(
-				"title" => "User List",
-				"route" => "/system/users",
-				"icon" => "<i class='fa fa-th-list'></i>",
-				"permission" => "system_user_can_view"
-			),
-			array
-			(
-				"title" => "Add User",
-				"route" => "/system/users/create",
-				"icon" => "<i class='fa fa-plus'></i>",
-				"permission" => "system_user_can_add"
-			),
-			array
-			(
-				"title" => "Edit User",
-				"route" => "/system/users/".$id."/edit",
-				"icon" => "<i class='fa fa-pencil'></i>",
-				"permission" => "system_user_can_edit"
-			),
-			array
-			(
-				"title" => "Delete User",
-				"route" => "/system/users/delete/".$id,
-				"icon" => "<i class = 'fa fa-trash'></i>",
-				"permission" => "system_user_can_delete"
-			)
-		);
-
-		$data['user'] = UserRepository::getUser($id);
-
-		return $data;
+		$this->dataArr['dbDataName'] = "user";
+		return DataPopulator::populateShowData($this->repo,$this->dataArr,$id);
 	}
 
-	public static function populateSearchData()
+	public function populateSearchData()
 	{
-		$data['title'] = "Search for User";
-		$data['activeLink'] = "user";
-		$data['subTitle'] = "Search For User";
-		$data['subLinks'] = array(
-			array
-			(
-				"title" => "Role List",
-				"route" => "/system/users",
-				"icon" => "<i class='fa fa-th-list'></i>",
-				"permission" => "system_user_can_view"
-			),
-			array
-			(
-				"title" => "Add Role",
-				"route" => "/system/users/create",
-				"icon" => "<i class='fa fa-plus'></i>",
-				"permission" => "system_user_can_add"
-			)
-		);	
-
-		return $data;
+		return DataPopulator::populateCreateData($this->dataArr);
 	}
 
 	public static function getRules()

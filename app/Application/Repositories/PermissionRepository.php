@@ -2,8 +2,9 @@
 
 use Illuminate\Http\Request;
 use App\Models\Permission;
+use App\Utilities\Contracts\RepositoryInterface;
 
-class PermissionRepository
+class PermissionRepository implements RepositoryInterface 
 {
 	/**
 	* This class is the repository for all permission queries
@@ -13,12 +14,12 @@ class PermissionRepository
 		return Permission::all();
 	}
 
-	public static function getAllPermissionsPaginated($pages)
+	public function getAllPaginated($pages)
 	{
 		return Permission::orderBy("permission_name","ASC")->paginate($pages);
 	}
 
-	public static function getPermission($id)
+	public function getItem($id)
 	{
 		return Permission::find($id);
 	}
