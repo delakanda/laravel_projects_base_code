@@ -97,42 +97,21 @@ class PermissionTasks
  		return DataPopulator::populateIndexData($this->repo,$this->dataArr);
 	}
 
-	public static function populateCreateData()
+	public function populateCreateData()
 	{
-		$data['title'] = "Add Permission";
-		$data['activeLink'] = "permission";
-		$data['subTitle'] = "Add Permission";
-		$data['subLinks'] = array(
-			array
-			(
-			"title" => "Permission List",
-			"route" => "/system/permissions",
-			"icon" => "<i class='fa fa-th-list'></i>",
-			"permission" => "system_permission_can_view"
-			)
-		);
+		$data = DataPopulator::populateCreateData($this->dataArr);
 
 		$data['roles'] = CommonTasks::getSelectArray("roles","role_name","ASC");//CommonTasks::getRolesArray();
 
 		return $data;
 	}
 
-	public static function populateEditData($id)
+	public function populateEditData($id)
 	{
-    	$data['title'] = "Edit Permission";
-		$data['activeLink'] = "permission";
-		$data['subTitle'] = "Edit Permission";
-    	$data['subLinks'] = array(
-			array
-			(
-				"title" => "Permission List",
-				"route" => "/system/permissions",
-				"icon" => "<i class='fa fa-th-list'></i>",
-				"permission" => "system_permission_can_view"
-			)
-    	);
+    	$this->dataArr['dbDataName'] = "permission";
+		$data = DataPopulator::populateEditData($this->repo,$this->dataArr,$id);
 
-    	$permission = PermissionRepository::getPermission($id);
+    	$permission = (new PermissionRepository)->getItem($id);
     	$data['permission'] = $permission;
 
 	    $data['roles'] = CommonTasks::getSelectArray("roles","role_name","ASC");//CommonTasks::getRolesArray();
@@ -141,70 +120,15 @@ class PermissionTasks
 	    return $data;
 	}
 
-	public static function populateShowData($id)
+	public function populateShowData($id)
 	{
-		$data['title'] = "View Permission Details";
-		$data['activeLink'] = "permission";
-		$data['subTitle'] = "View Permission Details";
-		$data['subLinks'] = array(
-			array
-			(
-				"title" => "Permission List",
-				"route" => "/system/permissions",
-				"icon" => "<i class='fa fa-th-list'></i>",
-				"permission" => "system_permission_can_view"
-			),
-			array
-			(
-				"title" => "Add Permission",
-				"route" => "/system/permissions/create",
-				"icon" => "<i class='fa fa-plus'></i>",
-				"permission" => "system_permission_can_add"
-			),
-			array
-			(
-				"title" => "Edit Permission",
-				"route" => "/system/permissions/".$id."/edit",
-				"icon" => "<i class='fa fa-pencil'></i>",
-				"permission" => "system_permission_can_edit"
-			),
-			array
-			(
-				"title" => "Delete Permission",
-				"route" => "/system/permissions/delete/".$id,
-				"icon" => "<i class = 'fa fa-trash'></i>",
-				"permission" => "system_permission_can_delete"
-			)
-		);
-
-		$data['permission'] = PermissionRepository::getPermission($id);
-
-		return $data;
+		$this->dataArr['dbDataName'] = "permission";
+		return DataPopulator::populateShowData($this->repo,$this->dataArr,$id);
 	}
 
-	public static function populateSearchData()
+	public function populateSearchData()
 	{
-		$data['title'] = "Search for Permission";
-		$data['activeLink'] = "permission";
-		$data['subTitle'] = "Search For Permission";
-		$data['subLinks'] = array(
-			array
-			(
-				"title" => "Permission List",
-				"route" => "/system/permissions",
-				"icon" => "<i class='fa fa-th-list'></i>",
-				"permission" => "system_permission_can_view"
-			),
-			array
-			(
-				"title" => "Add Permission",
-				"route" => "/system/permissions/create",
-				"icon" => "<i class='fa fa-plus'></i>",
-				"permission" => "system_permission_can_add"
-			)
-		);
-
-		return $data;
+		return DataPopulator::populateCreateData($this->dataArr);
 	}
 
 	public static function getRules()

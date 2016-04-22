@@ -24,6 +24,11 @@ class PermissionRepository implements RepositoryInterface
 		return Permission::find($id);
 	}
 
+	public static function getPermission($id)
+	{
+		return Permission::find($id);
+	}
+
 	public static function getAffiliatedToCount($fieldName,$id)
 	{
 		return Permission::where($fieldName,$id)->count();

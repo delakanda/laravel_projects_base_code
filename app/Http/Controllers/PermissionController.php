@@ -34,7 +34,7 @@ class PermissionController extends Controller {
   	{
 		if(self::checkUserPermissions("system_permission_can_add"))
 		{
-			$data = PermissionTasks::populateCreateData();
+			$data = (new PermissionTasks)->populateCreateData();
 		    return view('dashboard.system.permissions.add',$data);
 		}
 		else
@@ -59,7 +59,7 @@ class PermissionController extends Controller {
   	{
 		if(self::checkUserPermissions("system_permission_can_edit"))
 		{
-	    	$data = PermissionTasks::populateEditData($id);
+	    	$data = (new PermissionTasks)->populateEditData($id);
 	    	return view('dashboard.system.permissions.edit',$data);
 		}
 		else
@@ -84,7 +84,7 @@ class PermissionController extends Controller {
 	{
 		if(self::checkUserPermissions("system_permission_can_view"))
 		{
-			$data = PermissionTasks::populateShowData($id);
+			$data = (new PermissionTasks)->populateShowData($id);
 			return view('dashboard.system.permissions.view',$data);
 		}
 		else
@@ -109,7 +109,7 @@ class PermissionController extends Controller {
 	{
 		if(self::checkUserPermissions("system_permission_can_search"))
 		{
-			$data = PermissionTasks::populateSearchData();
+			$data = (new PermissionTasks)->populateSearchData();
 			return view('dashboard.system.permissions.search',$data);
 		}
 		else

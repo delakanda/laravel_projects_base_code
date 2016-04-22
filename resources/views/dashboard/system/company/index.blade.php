@@ -18,7 +18,7 @@
           </td>
         @else
           <td>
-            {!! Form::text("company_name", null , ['placeholder' => 'Company Name','class'=>'form-controlform-control-sm']) !!}
+            {!! Form::text("company_name", null , ['placeholder' => 'Company Name','class'=>'form-control form-control-sm']) !!}
           </td>
         @endif
       </tr>

@@ -25,6 +25,11 @@ class RoleRepository implements RepositoryInterface
 		return Role::find($id);
 	}
 
+	public static function getRole($id)
+	{
+		return Role::find($id);
+	}
+
 	// public static function getWhere($fieldName,$id,$mode)
 	// {
 	// 	if($mode == "MODEL_MODE")
