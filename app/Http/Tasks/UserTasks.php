@@ -47,22 +47,17 @@ class UserTasks
 
 		$validator = Validator::make($request -> all(), $rules);
 
-		if ($validator->fails())
-		{
+		if ($validator->fails()) {
 			return Redirect::to('/system/users/create')
 				->withErrors($validator)->withInput()->send();
 		}
-		else
-		{
+		else {
 			$user = new User;
 
-			if($request -> file('image_name'))
-      		{
+			if($request -> file('image_name')) {
 				$storageName = CommonTasks::prepareImage($request -> file('image_name'),200,200);
 				$user -> image_name = $storageName;
-			}
-			else
-			{
+			} else {
 				$user -> image_name = null;
 			}
 
@@ -88,30 +83,22 @@ class UserTasks
 
 		$validator = Validator::make($request -> all(), $rules);
 
-		if ($validator->fails())
-		{
+		if ($validator->fails()) {
 			return Redirect::to('/system/users/'.$id.'/edit')
         		->withErrors($validator)
         		->withInput()
         		->send();
-		}
-	    else
-	    {
+		} else {
 			//DEAL WITH IMAGE FILE
-			if($request -> file('image_name'))
-			{
-				if($user->image_name != null)
-				{
+			if($request -> file('image_name')) {
+				if($user->image_name != null) {
 					CommonTasks::deleteImage($user->image_name);
 				}
 
 				$storageName = CommonTasks::prepareImage($request -> file('image_name'),200,200);
 				$user -> image_name = $storageName;
-			}
-			else
-			{	
-				if($request -> input("clear_check") == 'yes')
-	        	{
+			} else {	
+				if($request -> input("clear_check") == 'yes') {
 					CommonTasks::deleteImage($user->image_name);
 	          		$user->image_name = null;
 	        	}	
@@ -133,10 +120,8 @@ class UserTasks
 	{
 		$user = (new UserRepository)->getItem($id);
 
-    	if($user -> image_name != null)
-		{
-      		if (file_exists(public_path('uploads/'.$user -> image_name)))
-	  		{
+    	if($user -> image_name != null) {
+      		if (file_exists(public_path('uploads/'.$user -> image_name))) {
 	        	unlink(public_path('uploads/'.$user -> image_name));
 	  		}
     	}

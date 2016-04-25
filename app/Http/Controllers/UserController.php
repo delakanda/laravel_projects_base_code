@@ -12,7 +12,6 @@ use Input;
 use Redirect;
 use Response;
 use Auth;
-
 use App\Http\Tasks\UserTasks;
 use App\Http\Tasks\CommonTasks;
 
