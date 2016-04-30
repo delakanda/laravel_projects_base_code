@@ -51,9 +51,23 @@ class CommonRepository
 		}
 	}
 
+	public function constructModel($request)
+	{
+		foreach($request->all() as $key=>$req) {
+
+			if($key == '_token' || $key == '_method') {
+				continue;
+			}
+
+			$this->model->$key = $req;
+		}
+
+		return $this->model;
+	}
+
 	public function deleteData()
 	{
-		
+
 	}
 
 }

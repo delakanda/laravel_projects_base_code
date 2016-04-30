@@ -40,7 +40,7 @@ class UserController extends Controller {
 	public function store(Request $request)
 	{
 		if(self::checkUserPermissions("system_user_can_add")) {
-			UserTasks::storeUserData($request);
+			(new UserTasks)->storeUserData($request);
 		} else {
 			CommonTasks::throwUnauthorized();
 		}

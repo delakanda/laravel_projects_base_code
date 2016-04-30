@@ -5,6 +5,7 @@ use App\Application\Utilities\Common\DataPopulator;
 use App\Application\Repositories\UserRepository;
 use App\Application\Repositories\RoleRepository;
 use App\Http\Controllers\RoleController;
+use App\Application\Repositories\CommonRepository;
 use App\Http\Tasks\CommonTasks;
 use App\Models\User;
 use App\Models\Role;
@@ -26,6 +27,7 @@ class UserTasks
 	private $activeLinkFlag = "user";
 	private $dataArr = null;
 	private $repo = null;
+	private $model = null;
 	
 	public function __construct()
 	{
@@ -38,9 +40,10 @@ class UserTasks
 		];
 
 		$this->repo = new UserRepository;
+		$this->model = new User;
 	}
 
-	public static function storeUserData(Request $request)
+	public function storeUserData(Request $request)
 	{
 		$rules = self::getRules();
 		$rules["username"] = "required | unique:users";
@@ -52,7 +55,8 @@ class UserTasks
 				->withErrors($validator)->withInput()->send();
 		}
 		else {
-			$user = new User;
+
+			$user = (new CommonRepository($this->model))->constructModel($request);
 
 			if($request -> file('image_name')) {
 				$storageName = CommonTasks::prepareImage($request -> file('image_name'),200,200);
@@ -61,11 +65,6 @@ class UserTasks
 				$user -> image_name = null;
 			}
 
-			$user -> first_name = $request -> input("first_name");
-			$user -> last_name = $request -> input("last_name");
-			$user -> email = $request -> input("email");
-			$user -> username = $request -> input("username");
-			$user -> role_id = $request -> input("role_id");
 			$user -> status = 2;
 			$user -> password = Hash::make("password");
 
@@ -77,8 +76,6 @@ class UserTasks
 
 	public static function updateUserData(Request $request,$id)
 	{
-		$user = User::find($id);
-
 		$rules = self::getRules();
 
 		$validator = Validator::make($request -> all(), $rules);
@@ -89,6 +86,9 @@ class UserTasks
         		->withInput()
         		->send();
 		} else {
+
+			$user = (new CommonRepository((new UserRepository)->getItem($id)))->constructModel($request);
+
 			//DEAL WITH IMAGE FILE
 			if($request -> file('image_name')) {
 				if($user->image_name != null) {
@@ -103,12 +103,6 @@ class UserTasks
 	          		$user->image_name = null;
 	        	}	
 			}
-
-			$user -> first_name = $request -> input("first_name");
-			$user -> last_name = $request -> input("last_name");
-			$user -> email = $request -> input("email");
-			$user -> username = $request -> input("username");
-			$user -> role_id = $request -> input("role_id");
 
 			$user -> push();
 			Session::flash('message', "User Details Updated");
