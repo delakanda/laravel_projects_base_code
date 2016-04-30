@@ -10,39 +10,28 @@
 
     <table class = "form-element full">
 
-      <tr>
-        <td>{!! Form::label("first_name","First Name") !!}</td>
-        <td>{!! Form::text("first_name", null , ['placeholder' => 'First Name','class'=>'form-control']) !!}</td>
-      </tr>
+      @include('dashboard.partials.form._text_field',['name' => 'first_name','displayName' => 'First Name'])
 
-      <tr>
-        <td>{!! Form::label("last_name","Last Name") !!}</td>
-        <td>{!! Form::text("last_name", null , ['placeholder' => 'Last Name','class'=>'form-control']) !!}</td>
-      </tr>
+      @include('dashboard.partials.form._text_field',['name' => 'last_name','displayName' => 'Last Name'])
 
-      <tr>
-        <td>{!! Form::label("username","Username") !!}</td>
-        <td>{!! Form::text("username", null , ['placeholder' => 'Username','class'=>'form-control']) !!}</td>
-      </tr>
+      @include('dashboard.partials.form._text_field',['name' => 'username','displayName' => 'Username'])
 
-      <tr>
-        <td>{!! Form::label("email","Email") !!}</td>
-        <td>{!! Form::text("email", null , ['placeholder' => 'Email','class'=>'form-control']) !!}</td>
-      </tr>
+      @include('dashboard.partials.form._text_field',['name' => 'email','displayName' => 'Email'])
 
-      <tr>
-        <td>{!! Form::label("password","Password") !!}</td>
-        <td>
-          {!! Form::password("password", ['placeholder' => 'Password','class'=>'form-control']) !!}
-            <span class = "red-note">Leave password fields blank if you do not wish to update it</span>
-        </td>
-      </tr>
+      @include('dashboard.partials.form._password_field',['name' => 'password','displayName' => 'Password','notice' => 'Leave password fields blank if you do not wish to update it'])
 
-      <tr>
-        <td>{!! Form::label("confirm_password","Confirm Password") !!}</td>
-        <td>{!! Form::password("confirm_password", ['placeholder' => 'Confirm Password','class'=>'form-control']) !!}</td>
-      </tr>
+      @include('dashboard.partials.form._password_field',['name' => 'confirm_password','displayName' => 'Confirm Password'])
 
+      @include('dashboard.partials.form._image_field',
+        [
+          'context' => "update",
+          'name' => 'image_name',
+          'displayName' => 'Image (optional)',
+          'data' => ( isset($user) ? $user : null ),
+          'imageColumnName' => 'image_name'
+        ]
+      )
+<!-- 
       <tr>
         <td>{!! Form::label("image_name","Image (optional)") !!}</td>
         <td>
@@ -54,7 +43,7 @@
             <input type = "checkbox" name = "clear_check" value = "yes" /> Clear Image (<span class = "small-text">Check to delete image</span>)
           @endif
         </td>
-      </tr>
+      </tr> -->
 
 
       <tr>

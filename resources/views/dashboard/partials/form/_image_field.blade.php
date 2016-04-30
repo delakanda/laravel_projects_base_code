@@ -14,7 +14,7 @@
         @if(isset($data->{$imageColumnName}))
           <div id = "small-image">
             <img src = "/uploads/{{ $data->{$imageColumnName} }}" />
-          </div>
+          </div><br/>
           <input type = "checkbox" name = "clear_check" value = "yes" /> Clear Image (<span class = "small-text">Check to delete image</span>)
         @endif
       </td>

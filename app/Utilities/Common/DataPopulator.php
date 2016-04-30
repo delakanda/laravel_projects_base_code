@@ -11,7 +11,7 @@ class DataPopulator
 		$data['title'] = $dataArr['title'];
 		$data['activeLink'] = $dataArr['activeLinkFlag'];
 		$data['subTitle'] = $dataArr['title'];
-		$data[$dataArr['dbDataName']] = $repo->getAllPaginated(20);
+		$data[$dataArr['dbDataName']] = $repo->getAllPaginated(13);
 		$data['subLinks'] = array(
       		self::addLink($dataArr),
 			array
