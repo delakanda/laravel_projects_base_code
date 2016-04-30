@@ -46,9 +46,7 @@
       </tr> -->
 
 
-      <tr>
-        <td colspan="2" align="right">{!! Form::submit("Save", array('class' => 'btn btn-primary')) !!}</td>
-      </tr>
+      @include('dashboard.partials.form._button_field',['buttonText' => "Save"])
 
     </table>
 
