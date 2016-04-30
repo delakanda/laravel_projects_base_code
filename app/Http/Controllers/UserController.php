@@ -15,43 +15,33 @@ use Auth;
 use App\Http\Tasks\UserTasks;
 use App\Http\Tasks\CommonTasks;
 
-
 class UserController extends Controller {
 
 	public function index()
 	{
-		if(self::checkUserPermissions("system_user_can_view"))
-		{
+		if(self::checkUserPermissions("system_user_can_view")) {
 			$data = (new UserTasks)->populateIndexData();
 			return view('dashboard.system.users.index',$data);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
 	}
 
 	public function create()
 	{
-		if(self::checkUserPermissions("system_user_can_add"))
-		{
+		if(self::checkUserPermissions("system_user_can_add")) {
 	    	$data = (new UserTasks)->populateCreateData();
 			return view('dashboard.system.users.add',$data);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
   	}
 
 	public function store(Request $request)
 	{
-		if(self::checkUserPermissions("system_user_can_add"))
-		{
+		if(self::checkUserPermissions("system_user_can_add")) {
 			UserTasks::storeUserData($request);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
 	}
@@ -126,14 +116,14 @@ class UserController extends Controller {
 	public function apiSearch($data)
 	{
 		$users = \DB::table("users")->select("users.id","first_name","last_name","email","username","role_name")
-		->join("roles","roles.id","=","users.role_id")
-		->where("first_name","ilike","%$data%")
-		->orWhere("last_name","ilike","%$data%")
-		->orWhere("email","ilike","%$data%")
-		->orWhere("username","ilike","%$data%")
-		->orWhere("role_name","ilike","%$data%")
+			->join("roles","roles.id","=","users.role_id")
+			->where("first_name","ilike","%$data%")
+			->orWhere("last_name","ilike","%$data%")
+			->orWhere("email","ilike","%$data%")
+			->orWhere("username","ilike","%$data%")
+			->orWhere("role_name","ilike","%$data%")
 
-		->get();
+			->get();
 		
 		return Response::json(
 			$users

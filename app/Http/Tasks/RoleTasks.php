@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Application\Utilities\Common\DataPopulator;
 use App\Application\Repositories\RoleRepository;
 use App\Application\Repositories\PermissionRepository;
+use App\Application\Repositories\CommonRepository;
 use App\Application\Repositories\UserRepository;
 use App\Http\Controllers\RoleController;
 use App\Http\Tasks\CommonTasks;
@@ -27,6 +28,7 @@ class RoleTasks
 	private $activeLinkFlag = "role";
 	private $dataArr = null;
 	private $repo = null;
+	private $model = null;
 	
 	public function __construct()
 	{
@@ -39,47 +41,23 @@ class RoleTasks
 		];
 
 		$this->repo = new RoleRepository;
+		$this->model = new Role;
 	}
 
-	public static function storeRoleData(Request $request)
+	public function storeData(Request $request)
 	{
-		$rules = self::getRules();
-		$rules["role_name"] = "required | unique:roles";
+		$constraintRule = ['attribute' => 'role_name','rule' => 'required | unique:roles'];
 
-		$validator = Validator::make($request -> all(), $rules);
+		$extraData = ['currentRoute' => '/system/roles/create','successRoute' => '/system/roles','modelName' => 'Role'];
 
-		if ($validator->fails())
-		{
-			return Redirect::to('/system/roles/create')
-				->withErrors($validator)->withInput()->send();
-		}
-		else
-		{
-			RoleRepository::saveRole($request);
-
-			Session::flash('message','Role Added');
-			return Redirect::to('/system/roles')->send();
-		}
+		(new CommonRepository($this->model))->saveData($request,self::getRules(),$extraData,$constraintRule);
 	}
 
-	public static function updateRoleData(Request $request, $id)
+	public function updateData(Request $request, $id)
 	{
-		$rules = self::getRules();
+		$extraData = ['currentRoute' => '/system/roles/'.$id.'/edit','successRoute' => '/system/roles','modelName' => 'Role'];
 
-		$validator = Validator::make($request -> all(), $rules);
-
-		if ($validator->fails())
-		{
-			return Redirect::to('/system/roles/'.$id.'/edit')
-        		->withErrors($validator)->withInput()->send();
-		}
-	    else
-	    {
-			RoleRepository::saveRole($request,$id);
-
-			Session::flash('message', "Role Details Updated");
-			return Redirect::to("/system/roles")->send();
-		}
+		(new CommonRepository((new RoleRepository)->getItem($id)))->saveData($request,self::getRules(),$extraData);
 	}
 
 	public static function deleteRoleData($id)

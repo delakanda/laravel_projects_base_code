@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Application\Utilities\Contracts\ModelInterface;
 
-class Role extends Model{
+class Role extends Model implements ModelInterface{
 
 	protected $table = 'roles';
 

@@ -42,7 +42,7 @@ class RoleController extends Controller {
   	public function store(Request $request)
   	{
 		if(self::checkUserPermissions("system_role_can_add")) {
-			RoleTasks::storeRoleData($request);
+			(new RoleTasks)->storeData($request);
 		} else {
 			CommonTasks::throwUnauthorized();
 		}
@@ -61,7 +61,7 @@ class RoleController extends Controller {
   	public function update(Request $request,$id)
   	{
 		if(self::checkUserPermissions("system_role_can_edit")) {
-			RoleTasks::updateRoleData($request, $id);
+			(new RoleTasks)->updateData($request, $id);
 		} else {
 			CommonTasks::throwUnauthorized();
 		}
