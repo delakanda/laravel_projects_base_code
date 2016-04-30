@@ -2,7 +2,7 @@
 
 use App\Models\Role;
 use Illuminate\Http\Request;
-use App\Utilities\Contracts\RepositoryInterface;
+use App\Application\Utilities\Contracts\RepositoryInterface;
 
 class RoleRepository implements RepositoryInterface
 {

@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\Application\Repositories\PermissionRepository;
-use App\Utilities\Common\DataPopulator;
+use App\Application\Utilities\Common\DataPopulator;
 use App\Http\Tasks\CommonTasks;
 use App\Models\Permission;
 use App\Models\Role;

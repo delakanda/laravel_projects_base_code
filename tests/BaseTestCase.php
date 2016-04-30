@@ -24,7 +24,7 @@ class BaseTestCase extends TestCase
         $passwordField = $this->webDriver->findElement(WebDriverBy::name("password"));
         $passwordField -> sendKeys("mala");
 
-        $loginBtn = $this->webDriver->findElement(WebDriverBy::id("login-btn"));
+        $loginBtn = $this->webDriver->findElement(WebDriverBy::className("btn-default"));
         $loginBtn -> click();
 
         $this->webDriver->manage()->timeouts()->implicitlyWait(1000);
@@ -82,7 +82,7 @@ class BaseTestCase extends TestCase
 
     protected function submitForm()
     {
-        $submitBtn = $this->webDriver->findElement(WebDriverBy::className("btn-primary"));
+        $submitBtn = $this->webDriver->findElement(WebDriverBy::id("submit-btn"));
         $submitBtn -> click();
     }
 

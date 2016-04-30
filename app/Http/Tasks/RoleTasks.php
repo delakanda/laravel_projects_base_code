@@ -1,7 +1,7 @@
 <?php namespace App\Http\Tasks; 
 
 use Illuminate\Http\Request;
-use App\Utilities\Common\DataPopulator;
+use App\Application\Utilities\Common\DataPopulator;
 use App\Application\Repositories\RoleRepository;
 use App\Application\Repositories\PermissionRepository;
 use App\Application\Repositories\UserRepository;

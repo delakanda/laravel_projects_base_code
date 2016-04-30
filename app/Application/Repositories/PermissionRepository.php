@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\Models\Permission;
-use App\Utilities\Contracts\RepositoryInterface;
+use App\Application\Utilities\Contracts\RepositoryInterface;
 
 class PermissionRepository implements RepositoryInterface 
 {

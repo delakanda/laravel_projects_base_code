@@ -2,7 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Utilities\Contracts\RepositoryInterface;
+use App\Application\Utilities\Contracts\RepositoryInterface;
 
 class UserRepository implements RepositoryInterface
 {

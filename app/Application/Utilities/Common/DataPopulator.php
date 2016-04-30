@@ -1,8 +1,8 @@
 <?php 
 
-namespace App\Utilities\Common;
+namespace App\Application\Utilities\Common;
 
-use App\Utilities\Contracts\RepositoryInterface;
+use App\Application\Utilities\Contracts\RepositoryInterface;
 
 class DataPopulator
 {
