@@ -41,7 +41,6 @@ class RoleTasks
 		];
 
 		$this->repo = new RoleRepository;
-		$this->model = new Role;
 	}
 
 	public function storeData(Request $request)
@@ -50,7 +49,7 @@ class RoleTasks
 
 		$extraData = ['currentRoute' => '/system/roles/create','successRoute' => '/system/roles','modelName' => 'Role'];
 
-		(new CommonRepository($this->model))->saveData($request,self::getRules(),$extraData,$constraintRule);
+		(new CommonRepository(new Role()))->saveData($request,self::getRules(),$extraData,$constraintRule);
 	}
 
 	public function updateData(Request $request, $id)

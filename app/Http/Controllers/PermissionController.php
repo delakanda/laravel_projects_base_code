@@ -47,7 +47,7 @@ class PermissionController extends Controller {
   	{
 		if(self::checkUserPermissions("system_permission_can_add"))
 		{
-	    	PermissionTasks::storePermissionData($request);
+	    	(new PermissionTasks)->storeData($request);
 		}
 		else
 		{
@@ -72,7 +72,7 @@ class PermissionController extends Controller {
   	{
 		if(self::checkUserPermissions("system_permission_can_edit"))
 		{
-	    	PermissionTasks::updatePermissionData($request,$id);
+	    	(new PermissionTasks)->updateData($request,$id);
 		}
 		else
 		{
@@ -97,7 +97,7 @@ class PermissionController extends Controller {
   	{
 		if(self::checkUserPermissions("system_permission_can_edit"))
 		{
-			PermissionTasks::deletePermissionData($id);
+			(new PermissionTasks)->deleteData($id);
 		}
 		else
 		{

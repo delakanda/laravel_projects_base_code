@@ -46,7 +46,7 @@ class CommonRepository
 
 			$this->model->save();
 
-			Session::flash('message',$extraData['modelName'].' Added');
+			Session::flash('message',$extraData['modelName'].' Saved');
 			return Redirect::to($extraData['successRoute'])->send();
 		}
 	}
@@ -65,9 +65,12 @@ class CommonRepository
 		return $this->model;
 	}
 
-	public function deleteData()
+	public function deleteData($extraData)
 	{
+		$this->model->delete();
 
+		Session::flash('message',$extraData['modelName'].' Deleted');
+		return Redirect::to($extraData['successRoute'])->send();
 	}
 
 }

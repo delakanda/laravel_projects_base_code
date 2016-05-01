@@ -40,7 +40,6 @@ class UserTasks
 		];
 
 		$this->repo = new UserRepository;
-		$this->model = new User;
 	}
 
 	public function storeUserData(Request $request)
@@ -56,7 +55,7 @@ class UserTasks
 		}
 		else {
 
-			$user = (new CommonRepository($this->model))->constructModel($request);
+			$user = (new CommonRepository(new User()))->constructModel($request);
 
 			if($request -> file('image_name')) {
 				$storageName = CommonTasks::prepareImage($request -> file('image_name'),200,200);

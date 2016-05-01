@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Application\Utilities\Contracts\ModelInterface;
 
-class Permission extends Model{
+class Permission extends Model implements ModelInterface{
 
 	protected $table = 'permissions';
 

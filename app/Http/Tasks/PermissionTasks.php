@@ -3,10 +3,10 @@
 use Illuminate\Http\Request;
 use App\Application\Repositories\PermissionRepository;
 use App\Application\Utilities\Common\DataPopulator;
+use App\Application\Repositories\CommonRepository;
 use App\Http\Tasks\CommonTasks;
 use App\Models\Permission;
 use App\Models\Role;
-
 use Validator;
 use Image;
 use Hash;
@@ -39,54 +39,25 @@ class PermissionTasks
 		$this->repo = new PermissionRepository;
 	}
 
-	public static function storePermissionData(Request $request)
+	public function storeData(Request $request)
 	{
-		$rules = self::getRules();
+		$extraData = ['currentRoute' => '/system/permissions/create','successRoute' => '/system/permissions','modelName' => 'Permission'];
 
-		$validator = Validator::make($request -> all(), $rules);
-
-		if ($validator->fails())
-		{
-			return Redirect::to('/system/permissions/create')
-				->withErrors($validator)->withInput()->send();
-		}
-		else
-		{
-     		PermissionRepository::savePermission($request);
-      		
-			Session::flash('message','Permission Added');
-			return Redirect::to('/system/permissions')->send();
-    	}
+		(new CommonRepository(new Permission()))->saveData($request,self::getRules(),$extraData);
 	}
 
-	public static function updatePermissionData(Request $request,$id)
+	public function updateData(Request $request,$id)
 	{
-		$permission = Permission::find($id);
+		$extraData = ['currentRoute' => '/system/permissions/'.$id.'/edit','successRoute' => '/system/permissions','modelName' => 'Permission'];
 
-		$rules = self::getRules();
-
-		$validator = Validator::make($request -> all(), $rules);
-
-		if ($validator->fails())
-		{
-			return Redirect::to('/system/permissions/'.$id.'/edit')
-        		->withErrors($validator)->withInput()->send();
-		}
-	    else
-	    {
-			PermissionRepository::savePermission($request,$id);
-
-			Session::flash('message', "Permission Details Updated");
-			return Redirect::to("/system/permissions")->send();
-		}
+		(new CommonRepository((new PermissionRepository)->getItem($id)))->saveData($request,self::getRules(),$extraData);
 	}
 
-	public static function deletePermissionData($id)
+	public function deleteData($id)
 	{
-		PermissionRepository::deletePermission($id);
+		$extraData = [ 'successRoute' => '/system/permissions','modelName' => 'Permission' ];
 
-	    Session::flash('message', 'Permission deleted');
-		return Redirect::to("/system/permissions")->send();
+		(new CommonRepository((new PermissionRepository)->getItem($id)))->deleteData($extraData);
 	}
 
 	public function populateIndexData()

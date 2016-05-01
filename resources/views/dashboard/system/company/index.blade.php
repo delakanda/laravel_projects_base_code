@@ -128,7 +128,7 @@
       </tr>
 
       <tr>
-        <td colspan="2" align="right">{!! Form::submit("Save", array('class' => 'btn btn-primary')) !!}</td>
+        <td colspan="2" align="right">{!! Form::submit("Save", array('class' => 'btn btn-sm btn-primary')) !!}</td>
       </tr>
 
     </table>
