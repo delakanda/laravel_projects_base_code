@@ -51,17 +51,7 @@
 
 	@include('dashboard.partials._main_header')
 
-  	<nav id = "main-nav">
-	    <ul>
-	      <li>
-
-			@include('dashboard.partials.menu._system')
-
-	      </li>
-
-	    </ul>
-
- 	</nav>
+	@include('dashboard.partials._main_nav')  	
 
   	<div id = "content-wrapper" class = "width-normal">
     	
