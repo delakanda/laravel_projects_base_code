@@ -13,8 +13,8 @@ use Input;
 use Redirect;
 use Response;
 use Auth;
-use App\Http\Tasks\RoleTasks;
-use App\Http\Tasks\CommonTasks;
+use App\Application\Tasks\RoleTasks;
+use App\Application\Tasks\CommonTasks;
 
 
 class RoleController extends Controller {

@@ -1,4 +1,4 @@
-<?php namespace App\Http\Tasks; 
+<?php namespace App\Application\Tasks; 
 
 use App\Models\Role;
 use Image;

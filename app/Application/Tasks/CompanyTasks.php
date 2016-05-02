@@ -1,10 +1,8 @@
-<?php namespace App\Http\Tasks; 
+<?php namespace App\Application\Tasks; 
 
 use Illuminate\Http\Request;
 use App\Application\Repositories\CompanyRepository;
-
-use App\Http\Tasks\CommonTasks;
-
+use App\Application\Tasks\CommonTasks;
 use App\Models\Role;
 use App\Models\Company;
 use Validator;

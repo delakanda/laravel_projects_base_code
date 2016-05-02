@@ -12,8 +12,7 @@ use Input;
 use Redirect;
 use Response;
 use Auth;
-
-use App\Http\Tasks\PermissionTasks;
+use App\Application\Tasks\PermissionTasks;
 
 class PermissionController extends Controller {
 

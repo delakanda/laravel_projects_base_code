@@ -1,7 +1,6 @@
 <?php namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\User;
 use App\Models\Role;
 use Validator;
@@ -12,8 +11,8 @@ use Input;
 use Redirect;
 use Response;
 use Auth;
-use App\Http\Tasks\UserTasks;
-use App\Http\Tasks\CommonTasks;
+use App\Application\Tasks\UserTasks;
+use App\Application\Tasks\CommonTasks;
 
 class UserController extends Controller {
 

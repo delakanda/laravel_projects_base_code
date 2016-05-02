@@ -1,10 +1,10 @@
-<?php namespace App\Http\Tasks; 
+<?php namespace App\Application\Tasks; 
 
 use Illuminate\Http\Request;
 use App\Application\Repositories\PermissionRepository;
 use App\Application\Utilities\Common\DataPopulator;
 use App\Application\Repositories\CommonRepository;
-use App\Http\Tasks\CommonTasks;
+use App\Application\Tasks\CommonTasks;
 use App\Models\Permission;
 use App\Models\Role;
 use Validator;

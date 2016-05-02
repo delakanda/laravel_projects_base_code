@@ -3,9 +3,8 @@
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Http\Tasks\CommonTasks;
-use App\Http\Tasks\CompanyTasks;
-
+use App\Application\Tasks\CommonTasks;
+use App\Application\Tasks\CompanyTasks;
 use Validator;
 use Image;
 use Hash;
@@ -20,25 +19,19 @@ class CompanyController extends Controller {
 
 	public function index()
 	{
-		if(self::checkUserPermissions("system_company_can_edit"))
-		{
+		if(self::checkUserPermissions("system_company_can_edit")){
 	    	$data = CompanyTasks::populateIndexData();
 			return view('dashboard.system.company.index',$data);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
   	}
 
 	public function save(Request $request)
 	{
-		if(self::checkUserPermissions("system_company_can_edit"))
-		{
+		if(self::checkUserPermissions("system_company_can_edit")) {
 			CompanyTasks::saveCompanyDetails($request);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
 	}

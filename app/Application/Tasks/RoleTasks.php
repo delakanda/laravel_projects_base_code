@@ -1,4 +1,4 @@
-<?php namespace App\Http\Tasks; 
+<?php namespace App\Application\Tasks; 
 
 use Illuminate\Http\Request;
 use App\Application\Utilities\Common\DataPopulator;
@@ -7,7 +7,7 @@ use App\Application\Repositories\PermissionRepository;
 use App\Application\Repositories\CommonRepository;
 use App\Application\Repositories\UserRepository;
 use App\Http\Controllers\RoleController;
-use App\Http\Tasks\CommonTasks;
+use App\Application\Tasks\CommonTasks;
 use App\Models\Role;
 use App\Models\Permission;
 use Validator;
@@ -170,7 +170,7 @@ class RoleTasks
 		$roles_permissions = PermissionRepository::getWhere("role_id",$id,"DATA_MODE");
 
 		$data['role'] = $role;
-		$data['permissions_parents'] = \Config::get("Permission.parents");
+		$data['permissions_parents'] = \Config::get("permission.parents");
 		$data['roles_permissions'] = $roles_permissions;
 		$data['models'] = RoleController::getModels();
 
