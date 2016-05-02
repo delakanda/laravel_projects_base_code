@@ -2,11 +2,11 @@
 
 return [
 
-  'parents' => [
+	  'parents' => [
 
-      'system',
-      'dashboard'
+	      'system',
+	      'dashboard'
 
-  ],
+	  ],
 
   ];
