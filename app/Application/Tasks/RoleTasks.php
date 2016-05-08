@@ -1,12 +1,12 @@
 <?php namespace App\Application\Tasks; 
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\System\RoleController;
 use App\Application\Utilities\Common\DataPopulator;
 use App\Application\Repositories\RoleRepository;
 use App\Application\Repositories\PermissionRepository;
 use App\Application\Repositories\CommonRepository;
 use App\Application\Repositories\UserRepository;
-use App\Http\Controllers\RoleController;
 use App\Application\Tasks\CommonTasks;
 use App\Models\Role;
 use App\Models\Permission;
@@ -59,7 +59,7 @@ class RoleTasks
 		(new CommonRepository((new RoleRepository)->getItem($id)))->saveData($request,self::getRules(),$extraData);
 	}
 
-	public static function deleteRoleData($id)
+	public function deleteData($id)
 	{
 		$role = (new RoleRepository)->getItem($id);
 
@@ -77,8 +77,9 @@ class RoleTasks
 
 		if($affiliatedPermissions > 0)
 		{
-			Session::flash('warning', 'Cannot delete role, Permissions are assigned to it');
-			return Redirect::to("/system/roles")->send();
+			$permissions = PermissionRepository::getAffiliatedRolePermissions($id);
+
+			$permissions->delete();
 		}
 
 		$role -> delete();

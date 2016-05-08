@@ -2,7 +2,7 @@
 
 @section('content')
 
-{!! Form::open(['method' => 'POST','action' => ['RoleController@savePermissions',$role->id] ] ) !!}
+{!! Form::open(['method' => 'POST','action' => ['System\RoleController@savePermissions',$role->id] ] ) !!}
 
 <div class = "card half">
 

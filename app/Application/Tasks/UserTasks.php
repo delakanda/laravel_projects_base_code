@@ -42,7 +42,7 @@ class UserTasks
 		$this->repo = new UserRepository;
 	}
 
-	public function storeUserData(Request $request)
+	public function storeData(Request $request)
 	{
 		$rules = self::getRules();
 		$rules["username"] = "required | unique:users";
@@ -73,7 +73,7 @@ class UserTasks
 	  	}
 	}
 
-	public static function updateUserData(Request $request,$id)
+	public static function updateData(Request $request,$id)
 	{
 		$rules = self::getRules();
 
@@ -109,7 +109,7 @@ class UserTasks
 		}
 	}
 
-	public static function deleteUserData($id)
+	public static function deleteData($id)
 	{
 		$user = (new UserRepository)->getItem($id);
 

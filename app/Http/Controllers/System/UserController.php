@@ -1,88 +1,16 @@
 <?php namespace App\Http\Controllers\System;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\Role;
-use Validator;
-use Image;
-use Hash;
-use Session;
-use Input;
-use Redirect;
-use Response;
-use Auth;
+use App\Http\Controllers\CommonController;
 use App\Application\Tasks\UserTasks;
 use App\Application\Tasks\CommonTasks;
 
-class UserController extends Controller {
+class UserController extends CommonController {
 
-	public function index()
+	public function __construct()
 	{
-		if(self::checkUserPermissions("system_user_can_view")) {
-			$data = (new UserTasks)->populateIndexData();
-			return view('dashboard.system.users.index',$data);
-		} else {
-			CommonTasks::throwUnauthorized();
-		}
-	}
-
-	public function create()
-	{
-		if(self::checkUserPermissions("system_user_can_add")) {
-	    	$data = (new UserTasks)->populateCreateData();
-			return view('dashboard.system.users.add',$data);
-		} else {
-			CommonTasks::throwUnauthorized();
-		}
-  	}
-
-	public function store(Request $request)
-	{
-		if(self::checkUserPermissions("system_user_can_add")) {
-			(new UserTasks)->storeUserData($request);
-		} else {
-			CommonTasks::throwUnauthorized();
-		}
-	}
-
-	public function edit($id)
-	{
-		if(self::checkUserPermissions("system_user_can_edit")) {
-			$data = (new UserTasks)->populateEditData($id);
-			return view('dashboard.system.users.edit',$data);
-		} else {
-			CommonTasks::throwUnauthorized();
-		}
-	}
-
-	public function update(Request $request,$id)
-	{
-		if(self::checkUserPermissions("system_user_can_edit")) {
-			UserTasks::updateUserData($request,$id);
-		} else {
-			CommonTasks::throwUnauthorized();
-		}
-
-	}
-
-	public function show($id)
-	{
-		if(self::checkUserPermissions("system_user_can_view")) {
-			$data = (new UserTasks)->populateShowData($id);
-			return view('dashboard.system.users.view',$data);
-		} else {
-			CommonTasks::throwUnauthorized();
-		}
-	}
-
-	public function delete($id)
-	{
-		if(self::checkUserPermissions("system_user_can_delete")) {
-			UserTasks::deleteUserData($id);
-		} else {
-			CommonTasks::throwUnauthorized();
-		}
+		$this->permissionPrefix = "system_user";
+		$this->taskObject = new UserTasks;
+		$this->viewPath = "dashboard.system.users";
 	}
 
 	public function resetUserPassword($id)
@@ -94,27 +22,12 @@ class UserController extends Controller {
 		}
 	}
 
-	public function apiGetUsers($data)
-	{
-		$data = ucfirst($data);
-		$users = \DB::table("users")->where("first_name","like","%$data%")->orWhere("last_name","like","%$data%")->get();
-		return Response::json(
-	    	$users
-		);
-	}
-
-	public function search()
-	{
-		if(self::checkUserPermissions("system_user_can_search")) {
-			$data = (new UserTasks)->populateSearchData();
-			return view('dashboard.system.users.search',$data);
-		} else {
-			CommonTasks::throwUnauthorized();
-		}
-	}
-
-	public function apiSearch($data)
-	{
-		(new UserTasks)->apiSearch($data);
-	}
+	// public function apiGetUsers($data)
+	// {
+	// 	$data = ucfirst($data);
+	// 	$users = \DB::table("users")->where("first_name","like","%$data%")->orWhere("last_name","like","%$data%")->get();
+	// 	return Response::json(
+	//     	$users
+	// 	);
+	// }
 }

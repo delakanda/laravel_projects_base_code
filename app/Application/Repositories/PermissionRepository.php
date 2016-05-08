@@ -34,6 +34,11 @@ class PermissionRepository implements RepositoryInterface
 		return Permission::where($fieldName,$id)->count();
 	}
 
+	public static function getAffiliatedRolePermissions($roleId)
+	{
+		return Permission::where("role_id",$roleId);
+	}
+
 	public static function getWhere($fieldName,$id,$mode)
 	{
 		if($mode == "MODEL_MODE")
