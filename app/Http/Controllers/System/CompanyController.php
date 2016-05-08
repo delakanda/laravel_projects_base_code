@@ -1,8 +1,8 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\System;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests;
 use App\Application\Tasks\CommonTasks;
 use App\Application\Tasks\CompanyTasks;
 use Validator;

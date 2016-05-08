@@ -6,7 +6,7 @@
 
   @include('errors.error_list')
 
-  {!! Form::open(['method' => 'POST','action' => 'PermissionController@store'] ) !!}
+  {!! Form::open(['method' => 'POST','action' => 'System\PermissionController@store'] ) !!}
 
     @include('dashboard.system.permissions.partials._form',['submitButtonText'=>'Save','context'=>'add'])
 

@@ -67,4 +67,13 @@ class PermissionRepository implements RepositoryInterface
 	    $permission -> delete();
 	}
 
+	public static function search($data)
+	{
+		return \DB::table("permissions")->select("permissions.id","permission_name","role_name")
+			->join("roles","roles.id","=","permissions.role_id")
+			->where("permission_name","ilike","%$data%")
+			->orWhere("role_name","ilike","%$data%")
+			->get();
+	}
+
 }

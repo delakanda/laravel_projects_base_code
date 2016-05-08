@@ -6,7 +6,7 @@
 
   @include('errors.error_list')
 
-  {!! Form::open(['method' => 'POST','action' => 'CompanyController@save','files'=>true ] ) !!}
+  {!! Form::open(['method' => 'POST','action' => 'System\CompanyController@save','files'=>true ] ) !!}
 
     <table class = "form-element full">
 

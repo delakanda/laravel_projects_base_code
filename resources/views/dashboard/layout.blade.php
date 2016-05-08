@@ -20,7 +20,7 @@
 
 			$permissions = \DB::table("permissions")->where("role_id",Auth::user()->role_id)->get();
 			$configParentPermissions = \Config::get("permission.parents");
-			$models = App\Http\Controllers\RoleController::getModels();
+			$models = App\Http\Controllers\System\RoleController::getModels();
 
 			foreach($permissions as $permission)
 			{

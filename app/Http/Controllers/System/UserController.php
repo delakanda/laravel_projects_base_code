@@ -1,6 +1,7 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\System;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
 use Validator;
@@ -114,18 +115,6 @@ class UserController extends Controller {
 
 	public function apiSearch($data)
 	{
-		$users = \DB::table("users")->select("users.id","first_name","last_name","email","username","role_name")
-			->join("roles","roles.id","=","users.role_id")
-			->where("first_name","ilike","%$data%")
-			->orWhere("last_name","ilike","%$data%")
-			->orWhere("email","ilike","%$data%")
-			->orWhere("username","ilike","%$data%")
-			->orWhere("role_name","ilike","%$data%")
-
-			->get();
-		
-		return Response::json(
-			$users
-		);
+		(new UserTasks)->apiSearch($data);
 	}
 }

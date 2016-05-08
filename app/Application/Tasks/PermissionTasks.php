@@ -102,6 +102,15 @@ class PermissionTasks
 		return DataPopulator::populateCreateData($this->dataArr);
 	}
 
+	public function apiSearch($data)
+	{
+		$permissions = PermissionRepository::search($data);
+		
+		return Response::json(
+			$permissions
+		)->send();
+	}
+
 	public static function getRules()
   	{
     	return array(

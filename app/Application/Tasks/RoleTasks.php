@@ -182,6 +182,15 @@ class RoleTasks
 		return DataPopulator::populateCreateData($this->dataArr);
 	}
 
+	public function apiSearch($data)
+	{
+		$roles = RoleRepository::search($data);
+		
+		return Response::json(
+			$roles
+		)->send();
+	}
+
 	public static function getRules()
 	{
 		return array(

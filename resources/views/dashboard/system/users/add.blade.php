@@ -6,7 +6,7 @@
 
   @include('errors.error_list')
 
-  {!! Form::open(['method' => 'POST','action' => 'UserController@store','files'=>true] ) !!}
+  {!! Form::open(['method' => 'POST','action' => 'System\UserController@store','files'=>true] ) !!}
 
     @include('dashboard.system.users.partials._form',['submitButtonText'=>'Save','context'=>'add'])
 

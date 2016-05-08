@@ -30,4 +30,16 @@ class UserRepository implements RepositoryInterface
 		return User::where($fieldName,$id)->count();
 	}
 
+	public static function search($data)
+	{
+		return \DB::table("users")->select("users.id","first_name","last_name","email","username","role_name")
+			->join("roles","roles.id","=","users.role_id")
+			->where("first_name","ilike","%$data%")
+			->orWhere("last_name","ilike","%$data%")
+			->orWhere("email","ilike","%$data%")
+			->orWhere("username","ilike","%$data%")
+			->orWhere("role_name","ilike","%$data%")->get();
+		
+	}
+
 }

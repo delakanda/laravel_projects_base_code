@@ -1,7 +1,7 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\System;
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Permission;
@@ -118,13 +118,7 @@ class RoleController extends Controller {
 
 	public function apiSearch($data)
 	{
-		$roles = \DB::table("roles")->select("id","role_name")
-				->where("role_name","ilike","%$data%")
-				->get();
-		
-		return Response::json(
-			$roles
-		);
+		(new RoleTasks)->apiSearch($data);
 	}
 
 	public static function getModels()

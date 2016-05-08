@@ -1,7 +1,7 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\System;
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\Permission;
 use Validator;
@@ -18,115 +18,83 @@ class PermissionController extends Controller {
 
 	public function index()
 	{
-		if(self::checkUserPermissions("system_permission_can_view"))
-		{
+		if(self::checkUserPermissions("system_permission_can_view")) {
 			$data = (new PermissionTasks)->populateIndexData();
 			return view('dashboard.system.permissions.index',$data);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
   	}
 
   	public function create()
   	{
-		if(self::checkUserPermissions("system_permission_can_add"))
-		{
+		if(self::checkUserPermissions("system_permission_can_add")) {
 			$data = (new PermissionTasks)->populateCreateData();
 		    return view('dashboard.system.permissions.add',$data);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
   	}
 
   	public function store(Request $request)
   	{
-		if(self::checkUserPermissions("system_permission_can_add"))
-		{
+		if(self::checkUserPermissions("system_permission_can_add")) {
 	    	(new PermissionTasks)->storeData($request);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
   	}
 
   	public function edit($id)
   	{
-		if(self::checkUserPermissions("system_permission_can_edit"))
-		{
+		if(self::checkUserPermissions("system_permission_can_edit")) {
 	    	$data = (new PermissionTasks)->populateEditData($id);
 	    	return view('dashboard.system.permissions.edit',$data);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
   	}
 
   	public function update(Request $request,$id)
   	{
-		if(self::checkUserPermissions("system_permission_can_edit"))
-		{
+		if(self::checkUserPermissions("system_permission_can_edit")) {
 	    	(new PermissionTasks)->updateData($request,$id);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
   	}
 
 	public function show($id)
 	{
-		if(self::checkUserPermissions("system_permission_can_view"))
-		{
+		if(self::checkUserPermissions("system_permission_can_view")) {
 			$data = (new PermissionTasks)->populateShowData($id);
 			return view('dashboard.system.permissions.view',$data);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
 	}
 
   	public function delete($id)
   	{
-		if(self::checkUserPermissions("system_permission_can_edit"))
-		{
+		if(self::checkUserPermissions("system_permission_can_edit")) {
 			(new PermissionTasks)->deleteData($id);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
   	}
 
 	public function search()
 	{
-		if(self::checkUserPermissions("system_permission_can_search"))
-		{
+		if(self::checkUserPermissions("system_permission_can_search")) {
 			$data = (new PermissionTasks)->populateSearchData();
 			return view('dashboard.system.permissions.search',$data);
-		}
-		else
-		{
+		} else {
 			CommonTasks::throwUnauthorized();
 		}
 	}
 
 	public function apiSearch($data)
 	{
-		$permissions = \DB::table("permissions")->select("permissions.id","permission_name","role_name")
-		->join("roles","roles.id","=","permissions.role_id")
-		->where("permission_name","ilike","%$data%")
-		->orWhere("role_name","ilike","%$data%")
-		->get();
-		
-		return Response::json(
-			$permissions
-		);
+		(new PermissionTasks)->apiSearch($data);
 	}
 }

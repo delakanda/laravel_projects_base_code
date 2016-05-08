@@ -178,6 +178,15 @@ class UserTasks
 		return DataPopulator::populateCreateData($this->dataArr);
 	}
 
+	public function apiSearch($data)
+	{
+		$users = UserRepository::search($data);
+
+		return Response::json(
+			$users
+		)->send();
+	}
+
 	public static function getRules()
 	{
 		return array(
