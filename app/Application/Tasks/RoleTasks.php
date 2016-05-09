@@ -19,16 +19,18 @@ use Redirect;
 use Response;
 use Auth;
 
-class RoleTasks
+class RoleTasks extends CommonTasks
 {
-	private $modelName = "Role";
-	private $rootRoute = "system";
-	private $currentRoute = "roles";
-	private $permissionPrefix = "system_role";
-	private $activeLinkFlag = "role";
-	private $dataArr = null;
-	private $repo = null;
-	private $model = null;
+	protected $modelName = "Role";
+	protected $rootRoute = "system";
+	protected $currentRoute = "roles";
+	protected $permissionPrefix = "system_role";
+	protected $activeLinkFlag = "role";
+	protected $constraintRule = ['attribute' => 'role_name','rule' => 'required | unique:roles'];
+	protected $successRoute = "/system/roles";
+	protected $dataArr = null;
+	protected $repo = null;
+	protected $model = null;
 	
 	public function __construct()
 	{
@@ -41,22 +43,7 @@ class RoleTasks
 		];
 
 		$this->repo = new RoleRepository;
-	}
-
-	public function storeData(Request $request)
-	{
-		$constraintRule = ['attribute' => 'role_name','rule' => 'required | unique:roles'];
-
-		$extraData = ['currentRoute' => '/system/roles/create','successRoute' => '/system/roles','modelName' => 'Role'];
-
-		(new CommonRepository(new Role()))->saveData($request,self::getRules(),$extraData,$constraintRule);
-	}
-
-	public function updateData(Request $request, $id)
-	{
-		$extraData = ['currentRoute' => '/system/roles/'.$id.'/edit','successRoute' => '/system/roles','modelName' => 'Role'];
-
-		(new CommonRepository((new RoleRepository)->getItem($id)))->saveData($request,self::getRules(),$extraData);
+		$this->model = new Role;
 	}
 
 	public function deleteData($id)
@@ -120,31 +107,6 @@ class RoleTasks
 		return Redirect::to("/system/roles/permissions/$id")->send();
 	}
 
-	public function populateIndexData()
-	{
-		$this->dataArr['title'] = 'Roles';
-		$this->dataArr['dbDataName'] = 'roles'; 			
-
- 		return DataPopulator::populateIndexData($this->repo,$this->dataArr);
-	}
-
-	public function populateCreateData()
-	{
-    	return DataPopulator::populateCreateData($this->dataArr);
-	}
-
-	public function populateEditData($id)
-	{
-		$this->dataArr['dbDataName'] = "role";
-		return DataPopulator::populateEditData($this->repo,$this->dataArr,$id);
-	}
-
-	public function populateShowData($id)
-	{
-		$this->dataArr['dbDataName'] = "role";
-		return DataPopulator::populateShowData($this->repo,$this->dataArr,$id);
-	}
-
 	public static function populatePermissionsData($id)
 	{
 		$data['title'] = "Role Permissions";
@@ -178,24 +140,8 @@ class RoleTasks
 		return $data;
 	}
 
-	public function populateSearchData()
+	public function getRules()
 	{
-		return DataPopulator::populateCreateData($this->dataArr);
-	}
-
-	public function apiSearch($data)
-	{
-		$roles = RoleRepository::search($data);
-		
-		return Response::json(
-			$roles
-		)->send();
-	}
-
-	public static function getRules()
-	{
-		return array(
-			'role_name' => 'required',
-		);
+		return ['role_name' => 'required'];
 	}
 }

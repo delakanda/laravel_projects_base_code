@@ -31,7 +31,7 @@ class CommonRepository
 
 		if ($validator->fails()) {
 
-			return Redirect::to($extraData['currentRoute'])
+			return Redirect::back()
 				->withErrors($validator)->withInput()->send();
 
 		} else {

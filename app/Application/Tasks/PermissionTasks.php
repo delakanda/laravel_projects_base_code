@@ -16,15 +16,18 @@ use Redirect;
 use Response;
 use Auth;
 
-class PermissionTasks
+class PermissionTasks extends CommonTasks
 {
-	private $modelName = "Permission";
-	private $rootRoute = "system";
-	private $currentRoute = "permissions";
-	private $permissionPrefix = "system_permission";
-	private $activeLinkFlag = "permission";
-	private $dataArr = null;
-	private $repo = null;
+	protected $modelName = "Permission";
+	protected $rootRoute = "system";
+	protected $currentRoute = "permissions";
+	protected $permissionPrefix = "system_permission";
+	protected $activeLinkFlag = "permission";
+	protected $constraintRule = null;
+	protected $successRoute = "/system/permissions";
+	protected $dataArr = null;
+	protected $repo = null;
+	protected $model = null;
 	
 	public function __construct()
 	{
@@ -37,42 +40,21 @@ class PermissionTasks
 		];
 
 		$this->repo = new PermissionRepository;
-	}
-
-	public function storeData(Request $request)
-	{
-		$extraData = ['currentRoute' => '/system/permissions/create','successRoute' => '/system/permissions','modelName' => 'Permission'];
-
-		(new CommonRepository(new Permission()))->saveData($request,self::getRules(),$extraData);
-	}
-
-	public function updateData(Request $request,$id)
-	{
-		$extraData = ['currentRoute' => '/system/permissions/'.$id.'/edit','successRoute' => '/system/permissions','modelName' => 'Permission'];
-
-		(new CommonRepository((new PermissionRepository)->getItem($id)))->saveData($request,self::getRules(),$extraData);
+		$this->model = new Permission;
 	}
 
 	public function deleteData($id)
 	{
 		$extraData = [ 'successRoute' => '/system/permissions','modelName' => 'Permission' ];
 
-		(new CommonRepository((new PermissionRepository)->getItem($id)))->deleteData($extraData);
-	}
-
-	public function populateIndexData()
-	{
-		$this->dataArr['title'] = 'Permission';
-		$this->dataArr['dbDataName'] = 'permissions'; 			
-
- 		return DataPopulator::populateIndexData($this->repo,$this->dataArr);
+		(new CommonRepository($this->repo->getItem($id)))->deleteData($extraData);
 	}
 
 	public function populateCreateData()
 	{
 		$data = DataPopulator::populateCreateData($this->dataArr);
 
-		$data['roles'] = CommonTasks::getSelectArray("roles","role_name","ASC");//CommonTasks::getRolesArray();
+		$data['roles'] = CommonTasks::getSelectArray("roles","role_name","ASC");
 
 		return $data;
 	}
@@ -85,36 +67,14 @@ class PermissionTasks
     	$permission = (new PermissionRepository)->getItem($id);
     	$data['permission'] = $permission;
 
-	    $data['roles'] = CommonTasks::getSelectArray("roles","role_name","ASC");//CommonTasks::getRolesArray();
+	    $data['roles'] = CommonTasks::getSelectArray("roles","role_name","ASC");
 	    $data['permissions_role'] = Role::where('id','=',$permission -> role_id)->first();
 
 	    return $data;
 	}
 
-	public function populateShowData($id)
-	{
-		$this->dataArr['dbDataName'] = "permission";
-		return DataPopulator::populateShowData($this->repo,$this->dataArr,$id);
-	}
-
-	public function populateSearchData()
-	{
-		return DataPopulator::populateCreateData($this->dataArr);
-	}
-
-	public function apiSearch($data)
-	{
-		$permissions = PermissionRepository::search($data);
-		
-		return Response::json(
-			$permissions
-		)->send();
-	}
-
 	public static function getRules()
   	{
-    	return array(
-      		'permission_name' => 'required'
-    	);
+    	return array('permission_name' => 'required');
   	}
 }

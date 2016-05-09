@@ -18,16 +18,16 @@ use Redirect;
 use Response;
 use Auth;
 
-class UserTasks
+class UserTasks extends CommonTasks
 {
-	private $modelName = "User";
-	private $rootRoute = "system";
-	private $currentRoute = "users";
-	private $permissionPrefix = "system_user";
-	private $activeLinkFlag = "user";
-	private $dataArr = null;
-	private $repo = null;
-	private $model = null;
+	protected $modelName = "User";
+	protected $rootRoute = "system";
+	protected $currentRoute = "users";
+	protected $permissionPrefix = "system_user";
+	protected $activeLinkFlag = "user";
+	protected $dataArr = null;
+	protected $repo = null;
+	protected $model = null;
 	
 	public function __construct()
 	{
@@ -40,6 +40,7 @@ class UserTasks
 		];
 
 		$this->repo = new UserRepository;
+		$this->model = new User;
 	}
 
 	public function storeData(Request $request)
@@ -73,7 +74,7 @@ class UserTasks
 	  	}
 	}
 
-	public static function updateData(Request $request,$id)
+	public function updateData(Request $request,$id)
 	{
 		$rules = self::getRules();
 
@@ -86,7 +87,7 @@ class UserTasks
         		->send();
 		} else {
 
-			$user = (new CommonRepository((new UserRepository)->getItem($id)))->constructModel($request);
+			$user = (new CommonRepository($this->repo->getItem($id)))->constructModel($request);
 
 			//DEAL WITH IMAGE FILE
 			if($request -> file('image_name')) {
@@ -138,14 +139,6 @@ class UserTasks
 		return Redirect::to("/system/users")->send();
 	}
 
-	public function populateIndexData()
-	{
-		$this->dataArr['title'] = 'Users';
-		$this->dataArr['dbDataName'] = 'users'; 			
-
- 		return DataPopulator::populateIndexData($this->repo,$this->dataArr);
-	}
-
 	public function populateCreateData()
 	{
 		$data = DataPopulator::populateCreateData($this->dataArr);
@@ -167,34 +160,9 @@ class UserTasks
 		return $data;
 	}
 
-	public function populateShowData($id)
-	{
-		$this->dataArr['dbDataName'] = "user";
-		return DataPopulator::populateShowData($this->repo,$this->dataArr,$id);
-	}
-
-	public function populateSearchData()
-	{
-		return DataPopulator::populateCreateData($this->dataArr);
-	}
-
-	public function apiSearch($data)
-	{
-		$users = UserRepository::search($data);
-
-		return Response::json(
-			$users
-		)->send();
-	}
-
 	public static function getRules()
 	{
-		return array(
-			'first_name' => 'required',
-			'last_name' => 'required',
-			'username' => 'required',
-			'email' => 'required',
-		);
+		return array('first_name' => 'required','last_name' => 'required','username' => 'required','email' => 'required');
 
 	}
 }
