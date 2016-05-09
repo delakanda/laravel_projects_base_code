@@ -5,7 +5,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\Department;
 use App\Models\Employee;
-use App\Application;
+use App\Application\Tasks\DashboardTasks;
 use App\Reminder;
 use Auth;
 use Validator;
@@ -24,6 +24,7 @@ class DashboardController extends Controller {
 		{
 			$data['title'] = "Dashboard";
 			$data['subTitle'] = "Dashboard";
+			$data['dashboardData'] = DashboardTasks::getDashData();
 
 			return view('dashboard.index',$data);
 		}
