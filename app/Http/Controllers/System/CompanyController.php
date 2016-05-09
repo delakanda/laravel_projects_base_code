@@ -14,7 +14,6 @@ use Redirect;
 use Response;
 use Auth;
 
-
 class CompanyController extends Controller {
 
 	public function index()

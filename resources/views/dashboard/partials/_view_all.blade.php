@@ -81,7 +81,7 @@
 
           foreach($foreign as $f) {
 
-            echo "<td>".$f['model']::find($d->$f['key'])->$f['property']."</td>";
+            echo "<td>".$f['model']::find($d->{$f['key']})->{$f['property']}."</td>";
 
           }
 
