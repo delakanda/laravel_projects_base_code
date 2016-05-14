@@ -14,38 +14,32 @@ abstract class Controller extends BaseController
 
     public static function checkUserPermissions($permission)
     {
-      $userPermissions = \DB::table("permissions")->where("role_id",Auth::user()->role_id)->get();
+        $userPermissions = \DB::table("permissions")->where("role_id",Auth::user()->role_id)->get();
 
-      foreach($userPermissions as $userPermission)
-      {
-        if($permission == $userPermission->permission_name)
-        {
-          //check user status to see if password needs to be changed
-          if(Auth::user()->status == 2)
-          {
-            return Redirect::to("/dashboard/change_password")->send();
-          }
-          else
-          {
-            return true;
-          }
+        foreach($userPermissions as $userPermission) {
+
+            if($permission == $userPermission->permission_name) {
+                //check user status to see if password needs to be changed
+                if(Auth::user()->status == 2) {
+                    return Redirect::to("/dashboard/change_password")->send();
+                }
+                else {
+                    return true;
+                }
+            }
+
         }
-
-      }
-      return false;
+        return false;
     }
 
     public static function checkUserStatus()
     {
-      //check user status to see if password needs to be changed
-      if(Auth::user()->status == 2)
-      {
-        return Redirect::to("/dashboard/change_password")->send();
-      }
-      else
-      {
-        return true;
-      }
+        //check user status to see if password needs to be changed
+        if(Auth::user()->status == 2) {
+            return Redirect::to("/dashboard/change_password")->send();
+        } else {
+            return true;
+        }
     }
 
 
