@@ -1,11 +1,10 @@
-<?php 
+<?php
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Application\Utilities\Contracts\ModelInterface;
 
-class Permission extends Model implements ModelInterface{
+class Permission extends CommonModel implements ModelInterface{
 
 	protected $table = 'permissions';
 

@@ -9,8 +9,8 @@ use App\Application\Utilities\Contracts\ModelInterface;
 class CommonRepository
 {
 	/**
-		Repo for common queries
-		Important : Before using this repo, All request names should match column names in the table to insert into 
+		* Repo for common queries
+		* Important : Before using this repo, All request names should match column names in the table to insert into
 	*/
 
 	protected $model;
@@ -71,6 +71,11 @@ class CommonRepository
 
 		Session::flash('message',$extraData['modelName'].' Deleted');
 		return Redirect::to($extraData['successRoute'])->send();
+	}
+
+	public static function switchConnection($conn,$table=null)
+	{
+		return ($table == null ? \DB::connection($conn) : \DB::connection($conn)->table($table));
 	}
 
 }

@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Application\Utilities\Contracts\ModelInterface;
 
-class Role extends Model implements ModelInterface{
+class Role extends CommonModel implements ModelInterface{
 
 	protected $table = 'roles';
 
