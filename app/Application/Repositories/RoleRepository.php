@@ -55,7 +55,7 @@ class RoleRepository implements RepositoryInterface
         $role -> save();
 	}
 
-	public static function search($data)
+	public function search($data)
 	{
 		return \DB::table("roles")->select("id","role_name")
 				->where("role_name","ilike","%$data%")

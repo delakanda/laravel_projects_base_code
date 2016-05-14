@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use App\Models\Permission;
 use App\Application\Utilities\Contracts\RepositoryInterface;
 
-class PermissionRepository implements RepositoryInterface 
+class PermissionRepository implements RepositoryInterface
 {
 	/**
 	* This class is the repository for all permission queries
@@ -72,7 +72,7 @@ class PermissionRepository implements RepositoryInterface
 	    $permission -> delete();
 	}
 
-	public static function search($data)
+	public function search($data)
 	{
 		return \DB::table("permissions")->select("permissions.id","permission_name","role_name")
 			->join("roles","roles.id","=","permissions.role_id")

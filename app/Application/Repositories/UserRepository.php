@@ -30,7 +30,7 @@ class UserRepository implements RepositoryInterface
 		return User::where($fieldName,$id)->count();
 	}
 
-	public static function search($data)
+	public function search($data)
 	{
 		return \DB::table("users")->select("users.id","first_name","last_name","email","username","role_name")
 			->join("roles","roles.id","=","users.role_id")
@@ -39,7 +39,7 @@ class UserRepository implements RepositoryInterface
 			->orWhere("email","ilike","%$data%")
 			->orWhere("username","ilike","%$data%")
 			->orWhere("role_name","ilike","%$data%")->get();
-		
+
 	}
 
 }

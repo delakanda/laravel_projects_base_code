@@ -1,4 +1,4 @@
-<?php namespace App\Application\Tasks; 
+<?php namespace App\Application\Tasks;
 
 use Image;
 use Response;
@@ -20,7 +20,7 @@ class CommonTasks
 	public function populateIndexData()
 	{
 		$this->dataArr['title'] = str_plural($this->modelName, 2);
-		$this->dataArr['dbDataName'] = $this->currentRoute; 			
+		$this->dataArr['dbDataName'] = $this->currentRoute;
 
  		return DataPopulator::populateIndexData($this->repo,$this->dataArr);
 	}
@@ -49,8 +49,8 @@ class CommonTasks
 
 	public function apiSearch($data)
 	{
-		$results = $this->repo::search($data);
-		
+		$results = $this->repo->search($data);
+
 		return Response::json($results)->send();
 	}
 
