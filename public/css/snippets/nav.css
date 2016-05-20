@@ -1,0 +1,59 @@
+nav#main-nav{
+  float:left;
+  width:15%;
+  background-color: #F1F1F1;
+}
+
+nav#main-nav ul{
+  padding:0;
+  margin:0;
+}
+
+nav#main-nav ul li{
+  list-style: none;
+}
+
+nav#main-nav ul li a{
+  color:#FFF;
+  display: block;
+}
+
+nav#main-nav ul li a.main-link{
+  font-size: 14px;
+  background-color: #F1F1F1;
+  padding:10px;
+  color:#222;
+  cursor: pointer;
+
+}
+
+nav#main-nav ul li a.main-link i{
+  display: inline-block;
+  width: 20px;
+}
+
+nav#main-nav ul li a.sub-link{
+  background-color: #E7E7E7;
+  padding:5px 10px;
+  color:#222;
+  font-size: 12px;
+}
+
+nav#main-nav ul li a.sub-link:hover{
+
+}
+
+nav#main-nav ul li a.sub-link i{
+  display: inline-block;
+  width: 20px;
+}
+
+nav#main-nav ul li a .nav-selection-icon{
+  width:5%;
+  display: inline-block;
+}
+
+nav#main-nav ul li a .nav-selection{
+  width:90%;
+  display: inline-block;
+}

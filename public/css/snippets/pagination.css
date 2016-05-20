@@ -1,0 +1,29 @@
+/* PAGINATION STYLES **************************/
+.page-links{
+  margin-bottom: 20px;
+}
+
+.page-links .active{
+  background-color: #D6523C;
+  color:#FFF !important;
+}
+
+.page-links ul {
+  margin:0;
+  padding:0;
+}
+
+.page-links ul li{
+  list-style: none;
+  display: inline-block;
+}
+
+.page-links ul li span,.page-links ul li a{
+  display: block;
+  padding:5px 10px;
+  border:1px solid #E1E1E1;
+}
+
+.page-links ul li a:hover{
+  background-color: #E1E1E1;
+}
