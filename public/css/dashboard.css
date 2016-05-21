@@ -14,3 +14,8 @@
     font-family: Open Sans Light;
     src: url('/fonts/OpenSans-Light.ttf');
 }
+
+@font-face {
+    font-family: Roboto Condensed;
+    src: url('/fonts/RobotoCondensed-Regular.ttf');
+}
