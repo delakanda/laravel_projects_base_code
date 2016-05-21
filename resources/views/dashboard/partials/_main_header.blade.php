@@ -3,7 +3,7 @@
 	<div id = "dash-heading" class = "float-left">
 		<div id = "menu-btn"><h4><i class="fa fa-bars"></i></div>
 		<a id = "dashboard" href = "/dashboard">
-			Dashboard
+			Application Name
 		</a>
 	</div>
 	<div class = "float-right">
@@ -34,5 +34,5 @@
 			</div>
 		</a>
 	</div>
-	
+
 </header>

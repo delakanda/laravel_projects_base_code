@@ -212,16 +212,6 @@ div.red-border{
   text-align: left;
 }
 
-.box-padding{
-  padding:0px 20px;
-  float:right;
-  color:#FFF;
-}
-
-.box-padding:hover{
-  background-color: #E75926;
-}
-
 .float-left{
   float:left;
 }
@@ -263,22 +253,22 @@ div.red-border{
 }
 
 .form-control:focus{
-  border-color:#D6523C;
+  border-color:#999;
 }
 
 .btn-primary{
-  background-color: #E75926;
+  background-color: #999;
   border:none;
   outline: none !important;
 
 }
 
 .btn-primary:hover{
-  background-color: #FF7E55;
+  background-color: #666;
 }
 
 .btn-primary:active{
-  background-color: #FF7416 !important;
+  background-color: #777 !important;
 }
 
 .table-sm td{
