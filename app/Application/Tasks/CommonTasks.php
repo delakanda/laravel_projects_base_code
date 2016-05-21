@@ -70,6 +70,13 @@ class CommonTasks
 		(new CommonRepository($this->repo->getItem($id)))->saveData($request,$this->getRules(),$extraData);
 	}
 
+	public function deleteData($id)
+	{
+		$extraData = [ 'successRoute' => $this->successRoute,'modelName' => $this->modelName ];
+
+		(new CommonRepository($this->repo->getItem($id)))->deleteData($extraData);
+	}
+
 	public static function getSelectArray($tableName,$orderByColumn,$orderByMode)
 	{
 		$data = \DB::table($tableName)->orderBy($orderByColumn,$orderByMode)->get();

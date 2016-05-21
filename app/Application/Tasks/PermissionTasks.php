@@ -1,4 +1,4 @@
-<?php namespace App\Application\Tasks; 
+<?php namespace App\Application\Tasks;
 
 use Illuminate\Http\Request;
 use App\Application\Repositories\PermissionRepository;
@@ -28,7 +28,7 @@ class PermissionTasks extends CommonTasks
 	protected $dataArr = null;
 	protected $repo = null;
 	protected $model = null;
-	
+
 	public function __construct()
 	{
 		$this->dataArr = [
@@ -41,13 +41,6 @@ class PermissionTasks extends CommonTasks
 
 		$this->repo = new PermissionRepository;
 		$this->model = new Permission;
-	}
-
-	public function deleteData($id)
-	{
-		$extraData = [ 'successRoute' => '/system/permissions','modelName' => 'Permission' ];
-
-		(new CommonRepository($this->repo->getItem($id)))->deleteData($extraData);
 	}
 
 	public function populateCreateData()

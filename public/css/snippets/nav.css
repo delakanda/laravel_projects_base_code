@@ -1,7 +1,8 @@
 nav#main-nav{
   float:left;
   width:15%;
-  background-color: #F1F1F1;
+  /*background-color: #F1F1F1;*/
+  border-right:1px solid #E1E1E1;
 }
 
 nav#main-nav ul{
@@ -20,7 +21,7 @@ nav#main-nav ul li a{
 
 nav#main-nav ul li a.main-link{
   font-size: 14px;
-  background-color: #F1F1F1;
+  background-color: #E7E7E7;
   padding:10px;
   color:#222;
   cursor: pointer;
@@ -33,7 +34,7 @@ nav#main-nav ul li a.main-link i{
 }
 
 nav#main-nav ul li a.sub-link{
-  background-color: #E7E7E7;
+  background-color: #F1F1F1;
   padding:5px 10px;
   color:#222;
   font-size: 12px;
