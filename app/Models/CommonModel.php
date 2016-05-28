@@ -11,4 +11,11 @@ class CommonModel extends Model
     {
         $this->connection = $conn;
     }
+
+    public static function getPermissions()
+	{
+		return array(
+            
+		);
+	}
 }

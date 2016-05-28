@@ -1,4 +1,4 @@
-<?php namespace App\Application\Tasks; 
+<?php namespace App\Application\Tasks;
 
 use Illuminate\Http\Request;
 use App\Application\Utilities\Common\DataPopulator;
@@ -28,7 +28,7 @@ class UserTasks extends CommonTasks
 	protected $dataArr = null;
 	protected $repo = null;
 	protected $model = null;
-	
+
 	public function __construct()
 	{
 		$this->dataArr = [
@@ -97,11 +97,11 @@ class UserTasks extends CommonTasks
 
 				$storageName = CommonTasks::prepareImage($request -> file('image_name'),200,200);
 				$user -> image_name = $storageName;
-			} else {	
+			} else {
 				if($request -> input("clear_check") == 'yes') {
 					CommonTasks::deleteImage($user->image_name);
 	          		$user->image_name = null;
-	        	}	
+	        	}
 			}
 
 			$user -> push();
@@ -110,7 +110,7 @@ class UserTasks extends CommonTasks
 		}
 	}
 
-	public static function deleteData($id)
+	public function deleteData($id)
 	{
 		$user = (new UserRepository)->getItem($id);
 
