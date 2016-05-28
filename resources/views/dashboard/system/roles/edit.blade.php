@@ -2,16 +2,10 @@
 
 @section('content')
 
-<div class = "card half">
-
-  @include('errors.error_list')
-
-  {!! Form::model($role, ['method' => 'PATCH','url' => ['system/roles',$role->id] ] ) !!}
-
-    @include('dashboard.system.roles.partials._form',['submitButtonText'=>'Update','context'=>'update'])
-
-  {!! Form::close() !!}
-
-</div>
+    @include('dashboard.partials.pages._edit',[
+        'model' => $role,
+        'urlPath' => 'system/roles',
+        'partialsPath'   => 'dashboard.system.roles.partials._form'
+    ])
 
 @endsection

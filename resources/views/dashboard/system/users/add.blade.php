@@ -2,16 +2,10 @@
 
 @section('content')
 
-<div class = "card half">
-
-  @include('errors.error_list')
-
-  {!! Form::open(['method' => 'POST','action' => 'System\UserController@store','files'=>true] ) !!}
-
-    @include('dashboard.system.users.partials._form',['submitButtonText'=>'Save','context'=>'add'])
-
-  {!! Form::close() !!}
-
-</div>
+    @include('dashboard.partials.pages._add',[
+        'controllerPath' => 'System\UserController',
+        'partialsPath'   => 'dashboard.system.users.partials._form',
+        'files' => true
+    ])
 
 @endsection

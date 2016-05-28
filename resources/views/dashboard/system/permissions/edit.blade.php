@@ -2,16 +2,10 @@
 
 @section('content')
 
-  <div class = "card half">
-
-    @include('errors.error_list')
-
-    {!! Form::model($permission, ['method' => 'PATCH','url' => ['system/permissions',$permission->id]] ) !!}
-
-      @include('dashboard.system.permissions.partials._form',['submitButtonText'=>'Update','roles'=>$roles,'context'=>'update'])
-
-    {!! Form::close() !!}
-
-  </div>
+    @include('dashboard.partials.pages._edit',[
+        'model' => $permission,
+        'urlPath' => 'system/permissions',
+        'partialsPath'   => 'dashboard.system.permissions.partials._form'
+    ])
 
 @endsection

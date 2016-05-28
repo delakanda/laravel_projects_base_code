@@ -2,16 +2,9 @@
 
 @section('content')
 
-<div class = "card half">
-
-  @include('errors.error_list')
-
-  {!! Form::open(['method' => 'POST','action' => 'System\PermissionController@store'] ) !!}
-
-    @include('dashboard.system.permissions.partials._form',['submitButtonText'=>'Save','context'=>'add'])
-
-  {!! Form::close() !!}
-
-</div>
+    @include('dashboard.partials.pages._add',[
+        'controllerPath' => 'System\PermissionController',
+        'partialsPath'   => 'dashboard.system.permissions.partials._form'
+    ])
 
 @endsection

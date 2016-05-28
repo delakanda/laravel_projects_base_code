@@ -2,16 +2,9 @@
 
 @section('content')
 
-<div class = "card half">
-
-  @include('errors.error_list')
-
-  {!! Form::open(['method' => 'POST','action' => 'System\RoleController@store'] ) !!}
-
-    @include('dashboard.system.roles.partials._form',['submitButtonText'=>'Save','context'=>'add'])
-
-  {!! Form::close() !!}
-
-</div>
-
+    @include('dashboard.partials.pages._add',[
+        'controllerPath' => 'System\RoleController',
+        'partialsPath'   => 'dashboard.system.roles.partials._form'
+    ])
+    
 @endsection
