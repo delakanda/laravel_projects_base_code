@@ -10,5 +10,6 @@ class PermissionController extends CommonController {
 		$this->permissionPrefix = "system_permission";
 		$this->taskObject = new PermissionTasks;
 		$this->viewPath = "dashboard.system.permissions";
+		$this->genericPath = true;
 	}
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Application\Utilities\Common;
 
@@ -11,7 +11,8 @@ class DataPopulator
 		$data['title'] = $dataArr['title'];
 		$data['activeLink'] = $dataArr['activeLinkFlag'];
 		$data['subTitle'] = $dataArr['title'];
-		$data[$dataArr['dbDataName']] = $repo->getAllPaginated(13);
+		// $data[$dataArr['dbDataName']] = $repo->getAllPaginated(13);
+		$data['paginationData'] = $repo->getAllPaginated(13);
 		$data['subLinks'] = array(
       		self::addLink($dataArr),
 			array
@@ -38,7 +39,7 @@ class DataPopulator
     	return $data;
 	}
 
-	public static function populateEditData(RepositoryInterface $repo,$dataArr,$id) 
+	public static function populateEditData(RepositoryInterface $repo,$dataArr,$id)
 	{
 		$data['title'] = "Edit ".$dataArr['modelName'];
 		$data['activeLink'] = $dataArr['activeLinkFlag'];
@@ -48,7 +49,7 @@ class DataPopulator
 			self::addLink($dataArr)
     	);
 
-		$data[$dataArr['dbDataName']] = $repo->getItem($id);
+		$data['model'] = $repo->getItem($id);
 
 		return $data;
 	}
@@ -77,7 +78,7 @@ class DataPopulator
 			)
 		);
 
-		$data[$dataArr['dbDataName']] = $repo->getItem($id);
+		$data['model'] = $repo->getItem($id);
 
 		return $data;
 	}
@@ -108,7 +109,7 @@ class DataPopulator
 
 	private static function listLink($dataArr)
 	{
-		return 
+		return
 		[
 			"title" => $dataArr['modelName']." list",
 			"route" => "/".$dataArr['rootRoute']."/".$dataArr['currentRoute'],

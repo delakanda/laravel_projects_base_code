@@ -24,10 +24,7 @@ class PermissionTasks extends CommonTasks
 	protected $permissionPrefix = "system_permission";
 	protected $activeLinkFlag = "permission";
 	protected $constraintRule = null;
-	protected $successRoute = "/system/permissions";
-	protected $dataArr;
-	protected $repo;
-	protected $model;
+	protected $successRoute = "system/permissions";
 
 	public function __construct()
 	{
@@ -35,6 +32,34 @@ class PermissionTasks extends CommonTasks
 
 		$this->repo = new PermissionRepository;
 		$this->model = new Permission;
+
+		//view data
+		$this->indexViewData += [
+			'colArray'		=>	['Permission Name'],
+			'foreignArray'	=>	[
+				['name'=>'Role','model'=> 'App\Models\Role','key'=> 'role_id','property' => 'role_name']
+			],
+			'actionsArray'	=>	['view','edit','delete']
+		];
+
+		$this->addViewData = [
+			'controllerPath' => 'System\PermissionController',
+	        'partialsPath'   => 'dashboard.system.permissions.partials._form'
+		];
+
+		$this->editViewData = [
+	        'urlPath' => 'system/permissions',
+	        'partialsPath'   => 'dashboard.system.permissions.partials._form'
+		];
+
+		$this->viewViewData = [
+			'propertiesArray' 	=> [
+				['name' => 'Permission Name','property' => 'permission_name']
+			],
+	        'foreignArray'  	=> [
+	         	['name'=>'Role','model'=> 'App\Models\Role','key'=> 'role_id','property' => 'role_name']
+	        ]
+		];
 	}
 
 	public function populateCreateData()
@@ -42,6 +67,8 @@ class PermissionTasks extends CommonTasks
 		$data = DataPopulator::populateCreateData($this->dataArr);
 
 		$data['roles'] = CommonTasks::getSelectArray("roles","role_name","ASC");
+
+		$data['addViewData'] = $this->addViewData;
 
 		return $data;
 	}
@@ -56,6 +83,8 @@ class PermissionTasks extends CommonTasks
 
 	    $data['roles'] = CommonTasks::getSelectArray("roles","role_name","ASC");
 	    $data['permissions_role'] = Role::where('id','=',$permission -> role_id)->first();
+
+		$data['editViewData'] = $this->editViewData;
 
 	    return $data;
 	}

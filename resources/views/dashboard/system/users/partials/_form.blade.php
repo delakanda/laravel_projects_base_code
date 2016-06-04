@@ -24,7 +24,7 @@
       'context' => $context,
       'name' => 'image_name',
       'displayName' => 'Image (optional)',
-      'data' => ( isset($user) ? $user : null ),
+      'data' => ( isset($model) ? $model : null ),
       'imageColumnName' => 'image_name'
     ]
   )

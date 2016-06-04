@@ -6,7 +6,7 @@
     (
       'cols' => array('First Name','Last Name'),
 
-      'data' => $users,
+      'data' => $paginationData,
 
       'route' => 'system/users',
 

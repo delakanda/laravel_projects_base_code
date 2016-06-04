@@ -6,7 +6,7 @@
     (
       'cols' => array('Permission Name'),
 
-      'data' => $permissions,
+      'data' => $paginationData,
 
       'route' => 'system/permissions',
 

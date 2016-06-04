@@ -13,9 +13,16 @@ class CommonTasks
 	protected $rootRoute;
 	protected $currentRoute;
 	protected $permissionPrefix;
+	protected $constraintRule;
+	protected $successRoute;
 	protected $activeLinkFlag;
 	protected $dataArr;
 	protected $repo;
+	protected $model;
+	protected $indexViewData;
+	protected $addViewData;
+	protected $editViewData;
+	protected $viewViewData;
 
 	public function __construct()
 	{
@@ -26,6 +33,11 @@ class CommonTasks
 			'currentRoute'		=> $this->currentRoute,
 			'permissionPrefix'	=> $this->permissionPrefix
 		];
+
+		$this->indexViewData = [
+			'route'			=>	$this->successRoute,
+			'permPrefix'	=>	$this->permissionPrefix,
+		];
 	}
 
 	public function populateIndexData()
@@ -33,24 +45,40 @@ class CommonTasks
 		$this->dataArr['title'] = str_plural($this->modelName, 2);
 		$this->dataArr['dbDataName'] = $this->currentRoute;
 
- 		return DataPopulator::populateIndexData($this->repo,$this->dataArr);
+ 		$data = DataPopulator::populateIndexData($this->repo,$this->dataArr);
+
+		$data['indexViewData'] = $this->indexViewData;
+
+		return $data;
 	}
 
 	public function populateCreateData()
 	{
-    	return DataPopulator::populateCreateData($this->dataArr);
+    	$data = DataPopulator::populateCreateData($this->dataArr);
+
+		$data['addViewData'] = $this->addViewData;
+
+		return $data;
 	}
 
 	public function populateEditData($id)
 	{
 		$this->dataArr['dbDataName'] = $this->activeLinkFlag;
-		return DataPopulator::populateEditData($this->repo,$this->dataArr,$id);
+
+		$data = DataPopulator::populateEditData($this->repo,$this->dataArr,$id);
+
+		$data['editViewData'] = $this->editViewData;
+
+		return $data;
 	}
 
 	public function populateShowData($id)
 	{
 		$this->dataArr['dbDataName'] = $this->activeLinkFlag;
-		return DataPopulator::populateShowData($this->repo,$this->dataArr,$id);
+		$data = DataPopulator::populateShowData($this->repo,$this->dataArr,$id);
+		$data['viewViewData'] = $this->viewViewData;
+
+		return $data;
 	}
 
 	public function populateSearchData()

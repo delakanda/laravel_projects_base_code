@@ -27,7 +27,7 @@ class RoleTasks extends CommonTasks
 	protected $permissionPrefix = "system_role";
 	protected $activeLinkFlag = "role";
 	protected $constraintRule = ['attribute' => 'role_name','rule' => 'required | unique:roles'];
-	protected $successRoute = "/system/roles";
+	protected $successRoute = "system/roles";
 	protected $dataArr;
 	protected $repo;
 	protected $model;
@@ -38,6 +38,31 @@ class RoleTasks extends CommonTasks
 
 		$this->repo = new RoleRepository;
 		$this->model = new Role;
+
+		//view data
+		$this->indexViewData += [
+			'colArray'		=>	['Role Name'],
+			'actionsArray'	=>	['view','edit','delete'],
+			'extraActions' 	=> [
+				["route" => "system/roles/permissions","title" => "Permissions","icon" => "<i class='fa fa-key'></i>","permission" => "system_role_can_permit"]
+		  	]
+		];
+
+		$this->addViewData = [
+			'controllerPath' => 'System\RoleController',
+	        'partialsPath'   => 'dashboard.system.roles.partials._form'
+		];
+
+		$this->editViewData = [
+	        'urlPath' => 'system/roles',
+	        'partialsPath'   => 'dashboard.system.roles.partials._form'
+		];
+
+		$this->viewViewData = [
+			'propertiesArray' 	=> [
+				['name' => 'Role Name','property' => 'role_name']
+			]
+		];
 	}
 
 	public function deleteData($id)

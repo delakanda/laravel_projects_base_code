@@ -1,11 +1,17 @@
-<div class = "card {{ $cardSize or 'half' }}">
+@extends('dashboard.layout')
 
-  @include('errors.error_list')
+@section('content')
 
-  {!! Form::open(['method' => 'POST','action' => $controllerPath.'@store','files' => (isset($files) ? true : false) ] ) !!}
+    <div class = "card {{ $addViewData['cardSize'] or 'half' }}">
 
-    @include($partialsPath,['submitButtonText'=>'Save','context'=>'add'])
+      @include('errors.error_list')
 
-  {!! Form::close() !!}
+      {!! Form::open(['method' => 'POST','action' => $addViewData['controllerPath'].'@store','files' => (isset($addViewData['files']) ? true : false) ] ) !!}
 
-</div>
+        @include($addViewData['partialsPath'],['submitButtonText'=>'Save','context'=>'add'])
+
+      {!! Form::close() !!}
+
+    </div>
+
+@endsection

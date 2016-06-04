@@ -4,17 +4,19 @@
 
   @include('dashboard.partials._view_all', array
     (
-      'cols' => $colArray,
+      'cols' => $indexViewData['colArray'],
 
-      'data' => $mainData,
+      'data' => $paginationData,
 
-      'route' => $route,
+      'route' => $indexViewData['route'],
 
-      'permission_prefix' => $permPrefix,
+      'permission_prefix' => $indexViewData['permPrefix'],
 
-      'foreign' => $foreignArray,
+      'foreign' => (isset($indexViewData['foreignArray']) ? $indexViewData['foreignArray'] : null),
 
-      'actions' => $actionsArray
+      'actions' => $indexViewData['actionsArray'],
+
+      'extraActions' => (isset($indexViewData['extraActions']) ? $indexViewData['extraActions'] : null)
 
     )
   )

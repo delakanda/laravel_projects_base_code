@@ -6,7 +6,7 @@
     (
       'cols' => array('Role Name'),
 
-      'data' => $roles,
+      'data' => $paginationData,
 
       'route' => 'system/roles',
 

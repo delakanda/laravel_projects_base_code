@@ -13,6 +13,7 @@ class RoleController extends CommonController {
 		$this->permissionPrefix = "system_role";
 		$this->taskObject = new RoleTasks;
 		$this->viewPath = "dashboard.system.roles";
+		$this->genericPath = true;
 	}
 
 	public function permissions($id)

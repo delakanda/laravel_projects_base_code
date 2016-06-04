@@ -1,11 +1,17 @@
-<div class = "card {{ $cardSize or 'half' }}">
+@extends('dashboard.layout')
 
-  @include('errors.error_list')
+@section('content')
 
-  {!! Form::model($model, ['method' => 'PATCH','url' => [$urlPath,$model->id] , 'files' => (isset($files) ? true : false) ] ) !!}
+    <div class = "card {{ $cardSize or 'half' }}">
 
-    @include($partialsPath,['submitButtonText'=>'Update','context'=>'update'])
+      @include('errors.error_list')
 
-  {!! Form::close() !!}
+      {!! Form::model($model, ['method' => 'PATCH','url' => [$editViewData['urlPath'],$model->id] , 'files' => (isset($editViewData['files']) ? true : false) ] ) !!}
 
-</div>
+        @include($editViewData['partialsPath'],['submitButtonText'=>'Update','context'=>'update'])
+
+      {!! Form::close() !!}
+
+    </div>
+
+@endsection

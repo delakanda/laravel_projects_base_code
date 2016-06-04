@@ -25,6 +25,7 @@ class UserTasks extends CommonTasks
 	protected $currentRoute = "users";
 	protected $permissionPrefix = "system_user";
 	protected $activeLinkFlag = "user";
+	protected $successRoute = "system/users";
 	protected $dataArr;
 	protected $repo;
 	protected $model;
@@ -35,6 +36,42 @@ class UserTasks extends CommonTasks
 
 		$this->repo = new UserRepository;
 		$this->model = new User;
+
+		//view data
+		$this->indexViewData += [
+			'colArray'		=>	['First Name','Last Name'],
+			'foreignArray'	=>	[
+				['name'=>'Role','model'=> 'App\Models\Role','key'=> 'role_id','property' => 'role_name']
+			],
+			'extraActions' 	=> [
+				["route" => "system/users/reset_password","title" => "Reset-Password","icon" => "<i class='fa fa-refresh'></i>","permission" => "system_user_can_reset-password"]
+		  	],
+			'actionsArray'	=>	['view','edit','delete']
+		];
+
+		$this->addViewData = [
+			'controllerPath' => 'System\UserController',
+	        'partialsPath'   => 'dashboard.system.users.partials._form',
+			'files' => true
+		];
+
+		$this->editViewData = [
+	        'urlPath' => 'system/users',
+	        'partialsPath'   => 'dashboard.system.users.partials._form',
+			'files' => true
+		];
+
+		$this->viewViewData = [
+			'propertiesArray' 	=> [
+				['name' => 'First Name','property' => 'first_name'],
+				['name' => 'Last Name','property' => 'last_name'],
+				['name' => 'Email','property' => 'email'],
+				['name' => 'Username','property' => 'username']
+			],
+	        'foreignArray'  	=> [
+	         	['name'=>'Role','model'=> 'App\Models\Role','key'=> 'role_id','property' => 'role_name']
+	        ]
+		];
 	}
 
 	public function storeData(Request $request)
@@ -138,6 +175,8 @@ class UserTasks extends CommonTasks
 		$data = DataPopulator::populateCreateData($this->dataArr);
 		$data['roles'] = CommonTasks::getSelectArray("roles","role_name","ASC");
 
+		$data['addViewData'] = $this->addViewData;
+
 		return $data;
 	}
 
@@ -150,6 +189,8 @@ class UserTasks extends CommonTasks
 
 		$data['roles'] = CommonTasks::getSelectArray("roles","role_name","ASC");//CommonTasks::getRolesArray();
 		$data['users_role'] = Role::where('id','=',$user -> role_id)->first();
+
+		$data['editViewData'] = $this->editViewData;
 
 		return $data;
 	}

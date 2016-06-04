@@ -11,6 +11,7 @@ class UserController extends CommonController {
 		$this->permissionPrefix = "system_user";
 		$this->taskObject = new UserTasks;
 		$this->viewPath = "dashboard.system.users";
+		$this->genericPath = true;
 	}
 
 	public function resetUserPassword($id)

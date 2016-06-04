@@ -20,12 +20,20 @@ class CommonController extends Controller
 	protected $taskObject;
 	protected $viewPath;
 
+	//variable to determine if generic view path should be used or not
+	protected $genericPath = false;
+
 	public function index()
 	{
 		if(self::checkUserPermissions($this->permissionPrefix."_can_view")) {
 			$data = $this->taskObject->populateIndexData();
-			return view($this->viewPath.".index",$data);
-			// return view('dashboard.partials.pages._index',$data);
+
+			if($this->genericPath) {
+				return view('dashboard.partials.pages._index',$data);
+			} else {
+				return view($this->viewPath.".index",$data);
+			}
+
 		} else {
 			CommonTasks::throwUnauthorized();
 		}
@@ -35,7 +43,13 @@ class CommonController extends Controller
   	{
 		if(self::checkUserPermissions($this->permissionPrefix."_can_add")) {
 			$data = $this->taskObject->populateCreateData();
-		    return view($this->viewPath.'.add',$data);
+
+			if($this->genericPath) {
+				return view('dashboard.partials.pages._add',$data);
+			} else {
+				return view($this->viewPath.'.add',$data);
+			}
+
 		} else {
 			CommonTasks::throwUnauthorized();
 		}
@@ -54,7 +68,13 @@ class CommonController extends Controller
   	{
 		if(self::checkUserPermissions($this->permissionPrefix."_can_edit")) {
 	    	$data = $this->taskObject->populateEditData($id);
-	    	return view($this->viewPath.'.edit',$data);
+
+			if($this->genericPath) {
+				return view('dashboard.partials.pages._edit',$data);
+			} else {
+				return view($this->viewPath.'.edit',$data);
+			}
+
 		} else {
 			CommonTasks::throwUnauthorized();
 		}
@@ -73,7 +93,13 @@ class CommonController extends Controller
 	{
 		if(self::checkUserPermissions($this->permissionPrefix."_can_view")) {
 			$data = $this->taskObject->populateShowData($id);
-			return view($this->viewPath.'.view',$data);
+
+			if($this->genericPath) {
+				return view('dashboard.partials.pages._view',$data);
+			} else {
+				return view($this->viewPath.'.view',$data);
+			}
+
 		} else {
 			CommonTasks::throwUnauthorized();
 		}
