@@ -17,6 +17,17 @@ class CommonTasks
 	protected $dataArr;
 	protected $repo;
 
+	public function __construct()
+	{
+		$this->dataArr = [
+			'activeLinkFlag'	=> $this->activeLinkFlag,
+			'modelName'			=> $this->modelName,
+			'rootRoute'			=> $this->rootRoute,
+			'currentRoute'		=> $this->currentRoute,
+			'permissionPrefix'	=> $this->permissionPrefix
+		];
+	}
+
 	public function populateIndexData()
 	{
 		$this->dataArr['title'] = str_plural($this->modelName, 2);

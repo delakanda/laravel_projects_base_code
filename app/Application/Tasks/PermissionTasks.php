@@ -25,19 +25,13 @@ class PermissionTasks extends CommonTasks
 	protected $activeLinkFlag = "permission";
 	protected $constraintRule = null;
 	protected $successRoute = "/system/permissions";
-	protected $dataArr = null;
-	protected $repo = null;
-	protected $model = null;
+	protected $dataArr;
+	protected $repo;
+	protected $model;
 
 	public function __construct()
 	{
-		$this->dataArr = [
-			'activeLinkFlag'	=> $this->activeLinkFlag,
-			'modelName'			=> $this->modelName,
-			'rootRoute'			=> $this->rootRoute,
-			'currentRoute'		=> $this->currentRoute,
-			'permissionPrefix'	=> $this->permissionPrefix
-		];
+		parent::__construct();
 
 		$this->repo = new PermissionRepository;
 		$this->model = new Permission;

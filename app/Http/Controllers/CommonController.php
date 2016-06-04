@@ -25,6 +25,7 @@ class CommonController extends Controller
 		if(self::checkUserPermissions($this->permissionPrefix."_can_view")) {
 			$data = $this->taskObject->populateIndexData();
 			return view($this->viewPath.".index",$data);
+			// return view('dashboard.partials.pages._index',$data);
 		} else {
 			CommonTasks::throwUnauthorized();
 		}

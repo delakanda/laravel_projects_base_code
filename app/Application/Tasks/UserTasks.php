@@ -25,19 +25,13 @@ class UserTasks extends CommonTasks
 	protected $currentRoute = "users";
 	protected $permissionPrefix = "system_user";
 	protected $activeLinkFlag = "user";
-	protected $dataArr = null;
-	protected $repo = null;
-	protected $model = null;
+	protected $dataArr;
+	protected $repo;
+	protected $model;
 
 	public function __construct()
 	{
-		$this->dataArr = [
-			'activeLinkFlag'	=> $this->activeLinkFlag,
-			'modelName'			=> $this->modelName,
-			'rootRoute'			=> $this->rootRoute,
-			'currentRoute'		=> $this->currentRoute,
-			'permissionPrefix'	=> $this->permissionPrefix
-		];
+		parent::__construct();
 
 		$this->repo = new UserRepository;
 		$this->model = new User;

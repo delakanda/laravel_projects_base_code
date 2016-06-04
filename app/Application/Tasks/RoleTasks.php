@@ -1,4 +1,4 @@
-<?php namespace App\Application\Tasks; 
+<?php namespace App\Application\Tasks;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\System\RoleController;
@@ -28,19 +28,13 @@ class RoleTasks extends CommonTasks
 	protected $activeLinkFlag = "role";
 	protected $constraintRule = ['attribute' => 'role_name','rule' => 'required | unique:roles'];
 	protected $successRoute = "/system/roles";
-	protected $dataArr = null;
-	protected $repo = null;
-	protected $model = null;
-	
+	protected $dataArr;
+	protected $repo;
+	protected $model;
+
 	public function __construct()
 	{
-		$this->dataArr = [
-			'activeLinkFlag'	=> $this->activeLinkFlag,
-			'modelName'			=> $this->modelName,
-			'rootRoute'			=> $this->rootRoute,
-			'currentRoute'		=> $this->currentRoute,
-			'permissionPrefix'	=> $this->permissionPrefix
-		];
+		parent::__construct();
 
 		$this->repo = new RoleRepository;
 		$this->model = new Role;
