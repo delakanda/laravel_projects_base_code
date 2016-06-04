@@ -72,6 +72,11 @@ class UserTasks extends CommonTasks
 	         	['name'=>'Role','model'=> 'App\Models\Role','key'=> 'role_id','property' => 'role_name']
 	        ]
 		];
+
+		$this->searchViewData += [
+			'searchRouteName'	=>	'user_search',
+			'searchText'		=>	'Search Users by Name, email, username or role'
+		];
 	}
 
 	public function storeData(Request $request)

@@ -60,6 +60,11 @@ class PermissionTasks extends CommonTasks
 	         	['name'=>'Role','model'=> 'App\Models\Role','key'=> 'role_id','property' => 'role_name']
 	        ]
 		];
+
+		$this->searchViewData += [
+			'searchRouteName'	=>	'permission_search',
+			'searchText'		=>	'Search Permissions by Name'
+		];
 	}
 
 	public function populateCreateData()

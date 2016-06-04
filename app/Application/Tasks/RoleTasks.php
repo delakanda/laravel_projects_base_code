@@ -63,6 +63,11 @@ class RoleTasks extends CommonTasks
 				['name' => 'Role Name','property' => 'role_name']
 			]
 		];
+
+		$this->searchViewData += [
+			'searchRouteName'	=>	'role_search',
+			'searchText'		=>	'Search Role by Name'
+		];
 	}
 
 	public function deleteData($id)

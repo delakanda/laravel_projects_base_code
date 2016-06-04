@@ -118,7 +118,13 @@ class CommonController extends Controller
 	{
 		if(self::checkUserPermissions($this->permissionPrefix."_can_search")) {
 			$data = $this->taskObject->populateSearchData();
-			return view($this->viewPath.'.search',$data);
+
+			if($this->genericPath) {
+				return view('dashboard.partials.pages._search',$data);
+			} else {
+				return view($this->viewPath.'.search',$data);
+			}
+
 		} else {
 			CommonTasks::throwUnauthorized();
 		}

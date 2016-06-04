@@ -23,6 +23,7 @@ class CommonTasks
 	protected $addViewData;
 	protected $editViewData;
 	protected $viewViewData;
+	protected $searchViewData;
 
 	public function __construct()
 	{
@@ -37,6 +38,11 @@ class CommonTasks
 		$this->indexViewData = [
 			'route'			=>	$this->successRoute,
 			'permPrefix'	=>	$this->permissionPrefix,
+		];
+
+		$this->searchViewData = [
+			'searchRootRoute'	=>	$this->rootRoute,
+			'searchCurrentRoute'=>	$this->currentRoute,
 		];
 	}
 
@@ -83,7 +89,11 @@ class CommonTasks
 
 	public function populateSearchData()
 	{
-		return DataPopulator::populateCreateData($this->dataArr);
+		$data = DataPopulator::populateCreateData($this->dataArr);
+
+		$data['searchViewData'] = $this->searchViewData;
+
+		return $data;
 	}
 
 	public function apiSearch($data)
