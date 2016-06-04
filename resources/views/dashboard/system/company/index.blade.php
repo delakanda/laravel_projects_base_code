@@ -2,9 +2,9 @@
 
 @section('content')
 
-<div class = "card half">
+ @include('errors.error_list')
 
-  @include('errors.error_list')
+<div class = "card half inline">
 
   {!! Form::open(['method' => 'POST','action' => 'System\CompanyController@save','files'=>true ] ) !!}
 
@@ -61,6 +61,11 @@
           </td>
         @endif
       </tr>
+
+  </table>
+  </div>
+  <div class = "card half inline">
+  <table class = "form-element full">
 
       <tr>
         <td>{!! Form::label("company_tin_number","Company Tin Number") !!}</td>
