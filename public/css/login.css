@@ -3,6 +3,7 @@
     src: url('/fonts/RegencieLight.ttf');
 }
 
+
 body{
   margin:0;
   padding:0;
@@ -24,7 +25,7 @@ div#login-box h1{
   font-weight: normal;
   margin-left:10%;
   padding:0;
-  color:#2980b9;
+  color:#222;
 }
 
 
@@ -49,13 +50,19 @@ div#login-box button{
   display: block;
   width:100%;
   border:none;
-  background-color: #2980b9;
-  color:#FFF;
+  outline:none;
+  background-color: #FFF;
+  border-top:1px solid #E1E1E1;
+  color:#222;
   padding:10px 0px;
   cursor: pointer;
   font-family: inherit;
   margin-top:20px;
   font-size: 16px;
+}
+
+div#login-box button:hover{
+    background-color: #E1E1E1;
 }
 
 div.error-box{
