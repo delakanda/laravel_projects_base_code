@@ -12,26 +12,31 @@
     </div>
   @endif
 
-    <table class = "details-table">
+  <table class = "details-table">
 
-      @foreach($properties as $property)
-        @if(isset($data -> {$property['property']}))
-          <tr>
-            <th> {{ $property['name'] }} </th><td> {{ $data -> {$property['property']} }} </td>
-          </tr>
-        @endif
-      @endforeach
-
-      @if(isset($foreign))
-        @foreach($foreign as $f)
-        @if(isset($f['model']::find($data->{$f['key']})->{$f['property']}))
-          <tr>
-            <th> {{ $f['name'] }} </th><td> {{ $f['model']::find($data->{$f['key']})->{$f['property']} }}</td>
-          </tr>
-        @endif
-      @endforeach
-
+    @foreach($properties as $property)
+      @if(isset($data -> {$property['property']}))
+        <tr>
+          <th> {{ $property['name'] }} </th>
+          @if(isset($property['symbolic']))
+              <td> {{ $property['symbolic'][$data -> {$property['property']}] }} </td>
+          @else
+              <td> {{ $data -> {$property['property']} }} </td>
+          @endif
+        </tr>
       @endif
+    @endforeach
 
-    </table>
+    @if(isset($foreign))
+      @foreach($foreign as $f)
+      @if(isset($f['model']::find($data->{$f['key']})->{$f['property']}))
+        <tr>
+          <th> {{ $f['name'] }} </th><td> {{ $f['model']::find($data->{$f['key']})->{$f['property']} }}</td>
+        </tr>
+      @endif
+    @endforeach
+
+    @endif
+
+  </table>
 </div>
